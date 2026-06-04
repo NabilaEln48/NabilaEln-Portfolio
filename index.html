@@ -3,38 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- ═══════════════════════════════════════════════════ -->
-    <!--  PRIMARY SEO                                        -->
-    <!-- ═══════════════════════════════════════════════════ -->
     <title>Nabila ELN | Software Engineer & Backend Developer</title>
     <meta name="description" content="Nabila ELN — systems-driven software engineer and solo founder specializing in autonomous backend architectures, Python, FastAPI, and high-performance systems. Creator of ELINSI.">
     <meta name="keywords" content="Nabila ELN, software engineer, backend developer, Python, FastAPI, PostgreSQL, autonomous systems, ELINSI, solo founder">
     <meta name="author" content="Nabila ELN">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.elnabilam.com">
-
-<!-- ═══════════════════════════════════════════════════ -->
-<!--  FAVICON — ELN logo in browser tab                 -->
-<!-- ═══════════════════════════════════════════════════ -->
- 
-<link rel="icon" type="image/png" href="/img/logo.png">
-<link rel="shortcut icon" href="/img/logo.png">
-<link rel="apple-touch-icon" href="/img/logo.png">
-
-    <!-- ═══════════════════════════════════════════════════ -->
-    <!--  TWITTER / X CARD                                   -->
-    <!-- ═══════════════════════════════════════════════════ -->
+    <link rel="icon" type="image/png" href="/img/logo.png">
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="apple-touch-icon" href="/img/logo.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@nabila_eln48">
     <meta name="twitter:creator" content="@nabila_eln48">
     <meta name="twitter:title" content="Nabila ELN | Software Engineer & Backend Developer">
     <meta name="twitter:description" content="Systems-driven software engineer and solo founder building autonomous backend architectures. Creator of ELINSI.">
     <meta name="twitter:image" content="https://www.nabilaeln.com/img/og-preview.png">
-
-    <!-- ═══════════════════════════════════════════════════ -->
-    <!--  STRUCTURED DATA — JSON-LD Person schema            -->
-    <!-- ═══════════════════════════════════════════════════ -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -48,85 +31,208 @@
         "https://www.linkedin.com/in/nabilaeln48/",
         "https://github.com/NabilaEln48/",
         "https://x.com/nabila_eln48"
-      ],
-      "knowsAbout": ["Python", "FastAPI", "PostgreSQL", "Java", "Docker", "MongoDB", "Backend Development", "Autonomous Systems"],
-      "founder": {
-        "@type": "Organization",
-        "name": "ELINSI",
-        "url": "https://elinsi.online/"
-      }
+      ]
     }
     </script>
-
-    <!-- ═══════════════════════════════════════════════════ -->
-    <!--  PERFORMANCE                                        -->
-    <!-- ═══════════════════════════════════════════════════ -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.simpleicons.org">
-    <meta name="theme-color" content="#1a0505">
-
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        :root {
+            --gold: #d4af37;
+            --gold-dim: rgba(212,175,55,0.15);
+            --gold-glow: rgba(212,175,55,0.3);
+            --bg: #1a0505;
+            --surface: #2d0a0a;
+            --surface2: #250808;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Syne', sans-serif;
+            scroll-behavior: smooth;
+            background: var(--bg);
+            color: #cbd5e1;
+        }
         .mono { font-family: 'Fira Code', monospace; }
-        
-        .gold-glow:hover {
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
-            border-color: #d4af37;
+
+        /* ── scrollbar ── */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+        /* ── scroll ticker ── */
+        @keyframes infinite-scroll {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+        .animate-infinite-scroll { animation: infinite-scroll 40s linear infinite; }
+        .pause-scroll { animation-play-state: paused; }
+
+        /* ── section label ── */
+        .section-label {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+        .section-label::before {
+            content: '';
+            display: block;
+            width: 3rem;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        /* ── card hover glow ── */
+        .card-hover {
+            transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+        }
+        .card-hover:hover {
+            border-color: rgba(212,175,55,0.4) !important;
+            box-shadow: 0 0 30px rgba(212,175,55,0.08);
+            transform: translateY(-3px);
+        }
+
+        /* ── modal ── */
+        #project-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(10,2,2,0.85);
+            backdrop-filter: blur(12px);
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+        #project-modal.open { display: flex; }
+        #modal-inner {
+            background: var(--surface);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 1rem;
+            max-width: 780px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalIn 0.35s cubic-bezier(0.34,1.56,0.64,1) both;
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.92) translateY(20px); }
+            to   { opacity: 1; transform: scale(1)   translateY(0); }
+        }
+        #modal-inner::-webkit-scrollbar { width: 3px; }
+        #modal-inner::-webkit-scrollbar-thumb { background: var(--gold); }
+
+        /* ── experience timeline ── */
+        .timeline-line {
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+        }
+        .timeline-dot {
+            width: 10px; height: 10px;
+            border: 2px solid var(--gold);
+            background: var(--bg);
+            border-radius: 50%;
+            position: absolute;
+            left: -4.5px;
+            top: 6px;
+        }
+
+        /* ── art grid ── */
+        .art-item {
+            overflow: hidden;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            cursor: pointer;
+            transition: transform 0.4s, border-color 0.3s;
+        }
+        .art-item:hover { transform: scale(1.02); border-color: rgba(212,175,55,0.4); }
+        .art-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s; }
+        .art-item:hover img { transform: scale(1.06); }
+
+        /* ── blog card ── */
+        .blog-card {
+            background: var(--surface2);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+        .blog-card:hover { border-color: rgba(212,175,55,0.35); transform: translateY(-4px); }
+
+        /* ── tag pill ── */
+        .tag { 
+            font-family: 'Fira Code', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(212,175,55,0.5);
+            padding: 0.2rem 0.6rem;
+            border: 1px solid rgba(212,175,55,0.15);
+            border-radius: 9999px;
         }
     </style>
 </head>
-<body class="bg-[#1a0505] text-slate-300 selection:bg-[#d4af37] selection:text-[#1a0505]">
+<body class="selection:bg-[#d4af37] selection:text-[#1a0505]">
 
+<!-- ═══════════════════════════  NAV  ═══════════════════════════ -->
 <header>
   <nav class="fixed w-full z-50 bg-[#1a0505]/90 backdrop-blur-md border-b border-white/5">
-    <div class="p-6 flex items-center max-w-6xl mx-auto relative">
-
-      <div class="flex items-center gap-3">
-        <button id="mobile-toggle" class="text-[#d4af37] font-bold text-2xl tracking-tighter mono focus:outline-none">
-          ELN<span class="text-white">.</span>
-        </button>
+    <div class="p-5 flex items-center max-w-6xl mx-auto relative">
+      <button id="mobile-toggle" class="text-[#d4af37] font-bold text-2xl tracking-tighter mono focus:outline-none">
+        ELN<span class="text-white">.</span>
+      </button>
+      <div class="absolute left-1/2 -translate-x-1/2 space-x-7 hidden md:flex text-[10px] font-medium uppercase tracking-[0.22em] text-white">
+        <a href="#about"      class="hover:text-[#d4af37] transition">About</a>
+        <a href="#experience" class="hover:text-[#d4af37] transition">Experience</a>
+        <a href="#work"       class="hover:text-[#d4af37] transition">Work</a>
+        <a href="#art"         class="hover:text-[#d4af37] transition">Art</a>
+        <a href="#photography" class="hover:text-[#d4af37] transition">Photo</a>
+        <a href="#blog"        class="hover:text-[#d4af37] transition">Blog</a>
       </div>
-
-      <div class="absolute left-1/2 -translate-x-1/2 space-x-8 hidden md:flex text-xs font-medium uppercase tracking-[0.2em] text-white">
-        <a href="#about" class="hover:text-[#d4af37] transition">About</a>
-        <a href="#about" class="hover:text-[#d4af37] transition">Skills</a>
-        <a href="#work" class="hover:text-[#d4af37] transition">Work</a>
-      </div>
-
-      <div class="ml-auto hidden md:flex items-center gap-6 text-white/70">
+      <div class="ml-auto hidden md:flex items-center gap-5 text-white/60">
         <a href="https://www.linkedin.com/in/nabilaeln48/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="hover:text-[#d4af37] transition">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
         </a>
         <a href="https://github.com/NabilaEln48/" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="hover:text-[#d4af37] transition">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
         </a>
         <a href="https://x.com/nabila_eln48" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter" class="hover:text-[#d4af37] transition">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
         </a>
         <a href="mailto:nabilaelnm@gmail.com" aria-label="Email" class="hover:text-[#d4af37] transition">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         </a>
       </div>
     </div>
-
-    <div id="mobile-menu" class="hidden md:hidden bg-[#1a0505] border-b border-white/5 px-6 py-8 animate-in slide-in-from-top duration-300">
-      <div class="flex flex-col space-y-6 text-center text-xs font-medium uppercase tracking-[0.2em] text-white">
-        <a href="#about" class="mobile-link hover:text-[#d4af37]">About</a>
-        <a href="#about" class="mobile-link hover:text-[#d4af37]">Skills</a>
-        <a href="#work" class="mobile-link hover:text-[#d4af37]">Work</a>
-        
-        <div class="flex justify-center gap-8 pt-4 text-white/50">
-          <a href="https://www.linkedin.com/in/nabilaeln48/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="hover:text-[#d4af37]">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+    <div id="mobile-menu" class="hidden md:hidden bg-[#1a0505] border-b border-white/5 px-6 py-8">
+      <div class="flex flex-col space-y-5 text-center text-[10px] font-medium uppercase tracking-[0.22em] text-white">
+        <a href="#about"      class="mobile-link hover:text-[#d4af37]">About</a>
+        <a href="#experience" class="mobile-link hover:text-[#d4af37]">Experience</a>
+        <a href="#work"       class="mobile-link hover:text-[#d4af37]">Work</a>
+        <a href="#art"         class="mobile-link hover:text-[#d4af37]">Art</a>
+        <a href="#photography" class="mobile-link hover:text-[#d4af37]">Photo</a>
+        <a href="#blog"        class="mobile-link hover:text-[#d4af37]">Blog</a>
+        <div class="flex justify-center gap-6 pt-4 text-white/50">
+          <a href="https://www.linkedin.com/in/nabilaeln48/" target="_blank" aria-label="LinkedIn" class="hover:text-[#d4af37]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
           </a>
-          <a href="https://github.com/NabilaEln48/" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="hover:text-[#d4af37]">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          <a href="https://github.com/NabilaEln48/" target="_blank" aria-label="GitHub" class="hover:text-[#d4af37]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
           </a>
           <a href="mailto:nabilaelnm@gmail.com" aria-label="Email" class="hover:text-[#d4af37]">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </a>
         </div>
       </div>
@@ -134,39 +240,19 @@
   </nav>
 </header>
 
-<script>
-  const toggleBtn = document.getElementById('mobile-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const links = document.querySelectorAll('.mobile-link');
-
-  toggleBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-  });
-
-  links.forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.classList.add('hidden');
-    });
-  });
-</script>
-
-<!-- HERO SECTION -->
+<!-- ═══════════════════════════  HERO  ═══════════════════════════ -->
 <section class="min-h-screen flex items-center justify-center px-6 md:px-10 py-20 bg-[#1a0505] text-white">
   <div class="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
-
     <div class="text-center md:text-left order-2 md:order-1">
       <div class="inline-block mb-6 md:mb-8 px-5 py-2 border border-white text-white text-xs md:text-sm uppercase tracking-[0.25em] rounded-full transition duration-300 hover:border-[#d4af37] hover:text-[#d4af37]">
         Software Engineer
       </div>
-
-      <h1 class="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tight text-[#d4af37] leading-tight md:leading-[1.05]">
+      <h1 class="text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-tight text-[#d4af37] leading-tight md:leading-[1.05]">
         NABILA-<span class="text-white">ELN</span>
       </h1>
-
       <p class="mt-6 md:mt-8 text-base md:text-xl text-white/70 tracking-wide max-w-xl mx-auto md:mx-0">
-        Powered by curiosity, Guided by coffee, hunted by code.
+        Powered by curiosity, guided by coffee, hunted by code.
       </p>
-
       <div class="mt-10 md:mt-12 grid grid-cols-2 sm:grid-cols-4 gap-6 md:gap-10 max-w-2xl">
         <div class="hover:scale-105 transition">
           <p class="text-3xl md:text-5xl font-bold text-[#d4af37]">4+</p>
@@ -186,25 +272,20 @@
         </div>
       </div>
     </div>
-
     <div class="flex justify-center md:justify-end order-1 md:order-2">
-      <div class="w-[280px] h-[280px] md:w-[460px] md:h-[460px] rounded-full overflow-hidden border-2 border-[#d4af37] shadow-[0_0_60px_rgba(212,175,55,0.3)]">
+      <div class="w-[280px] h-[280px] md:w-[460px] md:h-[460px] rounded-full overflow-hidden border-2 border-[#d4af37] shadow-[0_0_80px_rgba(212,175,55,0.25)]">
         <img src="/img/logo.png" alt="Nabila ELN — Software Engineer" class="w-full h-full object-cover">
       </div>
     </div>
   </div>
 </section>
 
+<!-- ═══════════════════════════  ABOUT  ═══════════════════════════ -->
 <section id="about" class="max-w-7xl mx-auto py-20 lg:py-32 px-6 md:px-10">
   <div class="flex flex-col-reverse lg:flex-row items-center lg:items-start gap-16">
-
     <div class="lg:w-3/5 w-full">
-      <h2 class="text-sm font-mono text-[#d4af37] mb-6 uppercase tracking-[0.3em] flex items-center gap-2">
-        <span class="h-[1px] w-12 bg-[#d4af37]"></span>
-        01. About Me
-      </h2>
-
-      <div class="space-y-6 text-lg md:text-xl text-slate-200 leading-relaxed font-light">
+      <div class="section-label">01. About Me</div>
+      <div class="space-y-5 text-lg md:text-xl text-slate-200 leading-relaxed font-light">
         <p>
           A systems-driven engineer and solo founder focused on building autonomous backend architectures.
           My background in Economics and Management shapes the way I break down complex business problems and
@@ -213,50 +294,44 @@
         </p>
         <p>
           I am currently building
-          <a href="https://www.elinsi.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-[#d4af37] transition font-medium">
-            ELINSI
-          </a>,
+          <a href="https://www.elinsi.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-[#d4af37] transition font-medium underline underline-offset-4 decoration-[#d4af37]/30">ELINSI</a>,
           an autonomous hiring engine designed to remove friction from modern recruitment.
         </p>
       </div>
-
       <div class="mt-12 overflow-hidden group">
-        <h3 class="text-sm font-mono text-slate-500 mb-8 uppercase tracking-[0.2em]">
-          Key Technical Stack
-        </h3>
+        <h3 class="mono text-xs text-slate-500 mb-8 uppercase tracking-[0.2em]">Key Technical Stack</h3>
         <div class="flex flex-nowrap gap-16 animate-infinite-scroll group-hover:pause-scroll">
           <div class="flex items-center gap-16 min-w-full">
-            <img src="https://cdn.simpleicons.org/python/d4af37" class="h-10" title="Python" alt="Python">
-            <img src="https://cdn.simpleicons.org/fastapi/d4af37" class="h-10" title="FastAPI" alt="FastAPI">
-            <img src="https://cdn.simpleicons.org/java/d4af37" class="h-10" title="Java" alt="Java">
+            <img src="https://cdn.simpleicons.org/python/d4af37"     class="h-10" title="Python"     alt="Python">
+            <img src="https://cdn.simpleicons.org/fastapi/d4af37"    class="h-10" title="FastAPI"    alt="FastAPI">
+            <img src="https://cdn.simpleicons.org/java/d4af37"       class="h-10" title="Java"       alt="Java">
             <img src="https://cdn.simpleicons.org/postgresql/d4af37" class="h-10" title="PostgreSQL" alt="PostgreSQL">
-            <img src="https://cdn.simpleicons.org/mysql/d4af37" class="h-10" title="MySQL" alt="MySQL">
-            <img src="https://cdn.simpleicons.org/mongodb/d4af37" class="h-10" title="MongoDB" alt="MongoDB">
-            <img src="https://cdn.simpleicons.org/docker/d4af37" class="h-10" title="Docker" alt="Docker">
-            <img src="https://cdn.simpleicons.org/postman/d4af37" class="h-10" title="Postman" alt="Postman">
-            <img src="https://cdn.simpleicons.org/git/d4af37" class="h-10" title="Git" alt="Git">
-            <img src="https://cdn.simpleicons.org/tailwindcss/d4af37" class="h-10" title="Tailwind" alt="Tailwind CSS">
+            <img src="https://cdn.simpleicons.org/mysql/d4af37"      class="h-10" title="MySQL"      alt="MySQL">
+            <img src="https://cdn.simpleicons.org/mongodb/d4af37"    class="h-10" title="MongoDB"    alt="MongoDB">
+            <img src="https://cdn.simpleicons.org/docker/d4af37"     class="h-10" title="Docker"     alt="Docker">
+            <img src="https://cdn.simpleicons.org/postman/d4af37"    class="h-10" title="Postman"    alt="Postman">
+            <img src="https://cdn.simpleicons.org/git/d4af37"        class="h-10" title="Git"        alt="Git">
+            <img src="https://cdn.simpleicons.org/tailwindcss/d4af37"class="h-10" title="Tailwind"   alt="Tailwind">
             <img src="https://cdn.simpleicons.org/javascript/d4af37" class="h-10" title="JavaScript" alt="JavaScript">
-            <img src="https://cdn.simpleicons.org/hibernate/d4af37" class="h-10" title="Hibernate" alt="Hibernate">
+            <img src="https://cdn.simpleicons.org/hibernate/d4af37"  class="h-10" title="Hibernate"  alt="Hibernate">
           </div>
           <div class="flex items-center gap-16 min-w-full" aria-hidden="true">
-            <img src="https://cdn.simpleicons.org/python/d4af37" class="h-10" title="Python" alt="">
-            <img src="https://cdn.simpleicons.org/fastapi/d4af37" class="h-10" title="FastAPI" alt="">
-            <img src="https://cdn.simpleicons.org/java/d4af37" class="h-10" title="Java" alt="">
-            <img src="https://cdn.simpleicons.org/postgresql/d4af37" class="h-10" title="PostgreSQL" alt="">
-            <img src="https://cdn.simpleicons.org/mysql/d4af37" class="h-10" title="MySQL" alt="">
-            <img src="https://cdn.simpleicons.org/mongodb/d4af37" class="h-10" title="MongoDB" alt="">
-            <img src="https://cdn.simpleicons.org/docker/d4af37" class="h-10" title="Docker" alt="">
-            <img src="https://cdn.simpleicons.org/postman/d4af37" class="h-10" title="Postman" alt="">
-            <img src="https://cdn.simpleicons.org/git/d4af37" class="h-10" title="Git" alt="">
-            <img src="https://cdn.simpleicons.org/tailwindcss/d4af37" class="h-10" title="Tailwind" alt="">
-            <img src="https://cdn.simpleicons.org/javascript/d4af37" class="h-10" title="JavaScript" alt="">
-            <img src="https://cdn.simpleicons.org/hibernate/d4af37" class="h-10" title="Hibernate" alt="">
+            <img src="https://cdn.simpleicons.org/python/d4af37"     class="h-10" alt="">
+            <img src="https://cdn.simpleicons.org/fastapi/d4af37"    class="h-10" alt="">
+            <img src="https://cdn.simpleicons.org/java/d4af37"       class="h-10" alt="">
+            <img src="https://cdn.simpleicons.org/postgresql/d4af37" class="h-10" alt="">
+            <img src="https://cdn.simpleicons.org/mysql/d4af37"      class="h-10" alt="">
+            <img src="https://cdn.simpleicons.org/mongodb/d4af37"    class="h-10" alt="">
+            <img src="https://cdn.simpleicons.org/docker/d4af37"     class="h-10" alt="">
+            <img src="https://cdn.simpleicons.org/postman/d4af37"    class="h-10" alt="">
+            <img src="https://cdn.simpleicons.org/git/d4af37"        class="h-10" alt="">
+            <img src="https://cdn.simpleicons.org/tailwindcss/d4af37"class="h-10" alt="">
+            <img src="https://cdn.simpleicons.org/javascript/d4af37" class="h-10" alt="">
+            <img src="https://cdn.simpleicons.org/hibernate/d4af37"  class="h-10" alt="">
           </div>
         </div>
       </div>
     </div>
-
     <div class="lg:w-2/5 w-full flex justify-center lg:justify-end mb-12 lg:mb-0">
       <div class="relative group">
         <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition duration-500 blur-xl bg-[#d4af37]/30"></div>
@@ -264,168 +339,563 @@
         <div class="absolute inset-0 rounded-xl border-2 border-[#d4af37] translate-x-4 translate-y-4 lg:translate-x-5 lg:translate-y-5 transition-transform duration-500 group-hover:translate-x-3 group-hover:translate-y-3 z-0"></div>
       </div>
     </div>
-
   </div>
 </section>
 
-<style>
-  @keyframes infinite-scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-100%); }
-  }
-  .animate-infinite-scroll {
-    animation: infinite-scroll 40s linear infinite;
-  }
-  .pause-scroll {
-    animation-play-state: paused;
-  }
-</style>
+<!-- ═══════════════════════════  EXPERIENCE  ═══════════════════════════ -->
+<section id="experience" class="max-w-7xl mx-auto py-20 lg:py-32 px-6 md:px-10">
+  <div class="section-label">02. Experience</div>
 
-<!-- PROJECTS -->
-<section id="work" class="max-w-7xl mx-auto py-24 px-6">
-    
-    <div class="relative group overflow-hidden rounded-xl bg-[#2d0a0a] border border-white/5 mb-20 shadow-2xl">
-        <div id="main-slider" class="flex transition-transform duration-700 ease-in-out">
-            
-            <div class="min-w-full p-12 md:p-24 flex flex-col items-center text-center relative">
-    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div class="w-full h-full bg-cover bg-center bg-no-repeat opacity-20" 
-             style="background-image: url('/img/elinsi.png');">
+  <div class="relative pl-6 space-y-0">
+    <div class="timeline-line"></div>
+
+    <!-- Entry 1 -->
+    <div class="relative pl-8 pb-14 group">
+      <div class="timeline-dot group-hover:bg-[#d4af37] transition-colors duration-300"></div>
+      <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-3">
+        <div>
+          <h3 class="text-xl font-bold text-white">Founder & Lead Engineer</h3>
+          <p class="text-[#d4af37] text-sm font-medium mt-0.5">
+            <a href="https://elinsi.online/" target="_blank" rel="noopener noreferrer" class="hover:underline">ELINSI</a>
+          </p>
         </div>
-        <div class="absolute inset-0 bg-[#2d0a0a]/40"></div>
+        <span class="mono text-xs text-slate-500 whitespace-nowrap mt-1 sm:mt-0">2024 — Present</span>
+      </div>
+      <p class="text-slate-400 text-base leading-relaxed max-w-2xl">
+        Architected and built an autonomous hiring engine from the ground up. Designed high-performance 
+        async FastAPI pipelines, optimized PostgreSQL schemas for sub-20ms query latency, and implemented 
+        ML-powered candidate matching. Leading all product, infrastructure, and growth decisions solo.
+      </p>
+      <div class="flex flex-wrap gap-2 mt-4">
+        <span class="tag">FastAPI</span><span class="tag">Python</span><span class="tag">PostgreSQL</span><span class="tag">Docker</span><span class="tag">ML</span>
+      </div>
     </div>
 
-    <div class="relative z-10">
-        <span class="text-[#d4af37] mono text-xs tracking-[0.4em] uppercase mb-4 block">Autonomous System</span>
-        <h4 class="text-4xl md:text-6xl font-bold text-white mb-6">ELINSI</h4>
-        <p class="text-slate-400 max-w-xl mx-auto text-lg mb-10 leading-relaxed">
-            A high‑performance Python backend powering ELINSI — an autonomous hiring engine built with FastAPI and optimized SQL schemas.
-        </p>
-        <div class="flex justify-center gap-6">
-            <a href="https://www.elinsi.online/" class="px-8 py-3 bg-[#d4af37] text-[#1a0505] font-bold text-xs uppercase tracking-widest hover:bg-[#f1c40f] transition">Visit Website</a>
+    <!-- Entry 2 -->
+    <div class="relative pl-8 pb-14 group">
+      <div class="timeline-dot group-hover:bg-[#d4af37] transition-colors duration-300"></div>
+      <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-3">
+        <div>
+          <h3 class="text-xl font-bold text-white">Backend Engineer</h3>
+          <p class="text-[#d4af37] text-sm font-medium mt-0.5">Freelance / Contract</p>
         </div>
+        <span class="mono text-xs text-slate-500 whitespace-nowrap mt-1 sm:mt-0">2022 — 2024</span>
+      </div>
+      <p class="text-slate-400 text-base leading-relaxed max-w-2xl">
+        Delivered backend solutions for multiple clients — REST API design, secure authentication systems 
+        (JWT, RBAC), database modeling, and deployment. Worked across Python and Java ecosystems, 
+        shipping production-grade code with 0-downtime deployments.
+      </p>
+      <div class="flex flex-wrap gap-2 mt-4">
+        <span class="tag">Python</span><span class="tag">Java</span><span class="tag">REST APIs</span><span class="tag">JWT</span><span class="tag">MySQL</span>
+      </div>
     </div>
-</div>
 
-<div class="min-w-full p-12 md:p-24 flex flex-col items-center text-center relative">
-    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div class="w-full h-full bg-cover bg-center bg-no-repeat opacity-20" 
-             style="background-image: url('/img/apolo.png');">
+    <!-- Entry 3 -->
+    <div class="relative pl-8 pb-14 group">
+      <div class="timeline-dot group-hover:bg-[#d4af37] transition-colors duration-300"></div>
+      <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-3">
+        <div>
+          <h3 class="text-xl font-bold text-white">Software Engineering Student</h3>
+          <p class="text-[#d4af37] text-sm font-medium mt-0.5">Self-directed + University</p>
         </div>
-        <div class="absolute inset-0 bg-[#2d0a0a]/40"></div>
+        <span class="mono text-xs text-slate-500 whitespace-nowrap mt-1 sm:mt-0">2020 — 2022</span>
+      </div>
+      <p class="text-slate-400 text-base leading-relaxed max-w-2xl">
+        Deep-dived into systems programming, data structures, and enterprise Java (Jakarta EE, Hibernate).
+        Built 25+ projects spanning fleet management systems, trading platforms, and game engines to 
+        solidify full-stack and backend fundamentals.
+      </p>
+      <div class="flex flex-wrap gap-2 mt-4">
+        <span class="tag">Jakarta EE</span><span class="tag">Hibernate</span><span class="tag">Algorithms</span><span class="tag">OOP</span>
+      </div>
     </div>
-
-    <div class="relative z-10">
-        <span class="text-[#d4af37] mono text-xs tracking-[0.4em] uppercase mb-4 block">Financial Platform</span>
-        <h4 class="text-4xl md:text-6xl font-bold text-white mb-6">APOLO Suite</h4>
-        <p class="text-slate-400 max-w-xl mx-auto text-lg mb-10 leading-relaxed">
-            A financial analysis platform for backtesting trading strategies using real‑time dashboards and optimized ingestion pipelines.
-        </p>
-        <div class="flex justify-center gap-6">
-            <a href="https://github.com/NabilaEln48/Apolo" target="_blank" rel="noopener noreferrer" class="px-8 py-3 bg-[#d4af37] text-[#1a0505] font-bold text-xs uppercase tracking-widest hover:bg-[#f1c40f] transition">Github</a>
-        </div>
-    </div>
-</div>
-
-<div class="min-w-full p-12 md:p-24 flex flex-col items-center text-center relative">
-    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div class="w-full h-full bg-cover bg-center bg-no-repeat opacity-20" 
-             style="background-image: url('/img/ptfms.png');">
-        </div>
-        <div class="absolute inset-0 bg-[#2d0a0a]/40"></div>
-    </div>
-
-    <div class="relative z-10">
-        <span class="text-[#d4af37] mono text-xs tracking-[0.4em] uppercase mb-4 block">Enterprise System</span>
-        <h4 class="text-4xl md:text-6xl font-bold text-white mb-6">PTFMS Fleet</h4>
-        <p class="text-slate-400 max-w-xl mx-auto text-lg mb-10 leading-relaxed">
-            Java‑based enterprise application for public‑transport fleet operations with secure auth and CRUD workflows.
-        </p>
-        <div class="flex justify-center gap-6">
-            <a href="https://github.com/NabilaEln48/Public-Transit-Fleet-Management-System" target="_blank" rel="noopener noreferrer" class="px-8 py-3 bg-[#d4af37] text-[#1a0505] font-bold text-xs uppercase tracking-widest hover:bg-[#f1c40f] transition">View Project</a>
-        </div>
-    </div>
-</div>
-        </div>
-
-        <button onclick="moveWorkSlide(-1)" aria-label="Previous project" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 text-white/20 hover:text-[#d4af37] transition">
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-        </button>
-        <button onclick="moveWorkSlide(1)" aria-label="Next project" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 text-white/20 hover:text-[#d4af37] transition">
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-        </button>
-    </div>
-
-    <div class="flex items-center gap-4 mb-12">
-        <h2 class="text-2xl font-bold text-white tracking-tight italic">/ Other Projects</h2>
-        <div class="h-[1px] flex-grow bg-[#d4af37]/10"></div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        
-        <a href="https://github.com/NabilaEln48/Secure-Document-Management-API" target="_blank" rel="noopener noreferrer" class="block bg-[#250808] p-8 rounded-sm border border-white/5 hover:border-[#d4af37]/30 transition-all duration-300 group">
-            <div class="text-[#d4af37] opacity-60 mb-6">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-            </div>
-            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-[#d4af37]">Secure document management API</h3>
-            <p class="text-slate-500 text-sm mb-6">Python-based API for encrypted document storage featuring JWT and RBAC.</p>
-            <div class="text-[10px] mono uppercase text-[#d4af37]/40 flex gap-3"><span>Java</span><span>Servlets</span></div>
-        </a>
-
-        <a href="https://github.com/NabilaEln48/BookRegistryApp" target="_blank" rel="noopener noreferrer" class="block bg-[#250808] p-8 rounded-sm border border-white/5 hover:border-[#d4af37]/30 transition-all duration-300 group">
-            <div class="text-[#d4af37] opacity-60 mb-6">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-            </div>
-            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-[#d4af37]">BookRegistryApp</h3>
-            <p class="text-slate-500 text-sm mb-6">CRUD application implementing Singleton and Factory patterns for clean backend architecture.</p>
-            <div class="text-[10px] mono uppercase text-[#d4af37]/40 flex gap-3"><span>Java</span><span>JSP</span></div>
-        </a>
-
-        <a href="https://github.com/NabilaEln48/Enterprise-Student-Information-System" target="_blank" rel="noopener noreferrer" class="block bg-[#250808] p-8 rounded-sm border border-white/5 hover:border-[#d4af37]/30 transition-all duration-300 group">
-            <div class="text-[#d4af37] opacity-60 mb-6">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/></svg>
-            </div>
-            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-[#d4af37]">Student System</h3>
-            <p class="text-slate-500 text-sm mb-6">Jakarta EE application designed for high‑concurrency using Hibernate ORM.</p>
-            <div class="text-[10px] mono uppercase text-[#d4af37]/40 flex gap-3"><span>JakartaEE</span><span>Hibernate</span></div>
-        </a>
-
-        <a href="https://github.com/NabilaEln48/Pacman_Game" target="_blank" rel="noopener noreferrer" class="block bg-[#250808] p-8 rounded-sm border border-white/5 hover:border-[#d4af37]/30 transition-all duration-300 group">
-            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-[#d4af37]">Pacman</h3>
-            <p class="text-slate-500 text-sm mb-6">Logic‑heavy implementation featuring pathfinding AI for ghost behavior.</p>
-            <div class="text-[10px] mono uppercase text-[#d4af37]/40 flex gap-3"><span>Python</span><span>AI</span></div>
-        </a>
-
-        <a href="https://github.com/NabilaEln48/FlappyBird_Java" target="_blank" rel="noopener noreferrer" class="block bg-[#250808] p-8 rounded-sm border border-white/5 hover:border-[#d4af37]/30 transition-all duration-300 group">
-            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-[#d4af37]">Flappy Bird</h3>
-            <p class="text-slate-500 text-sm mb-6">Classic game recreation with a custom Java engine and a Unity version.</p>
-            <div class="text-[10px] mono uppercase text-[#d4af37]/40 flex gap-3"><span>Unity</span><span>C#</span></div>
-        </a>
-
-        <a href="https://github.com/NabilaEln48/TicTacToe_Java" target="_blank" rel="noopener noreferrer" class="block bg-[#250808] p-8 rounded-sm border border-white/5 hover:border-[#d4af37]/30 transition-all duration-300 group">
-            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-[#d4af37]">TicTacToe</h3>
-            <p class="text-slate-500 text-sm mb-6">Python implementation featuring an unbeatable Minimax algorithm.</p>
-            <div class="text-[10px] mono uppercase text-[#d4af37]/40 flex gap-3"><span>Algorithms</span><span>Python</span></div>
-        </a>
-    </div>
+  </div>
 </section>
 
-<script>
-    let currentWorkSlide = 0;
-    function moveWorkSlide(n) {
-        const slider = document.getElementById('main-slider');
-        const totalSlides = slider.children.length;
-        currentWorkSlide = (currentWorkSlide + n + totalSlides) % totalSlides;
-        slider.style.transform = `translateX(-${currentWorkSlide * 100}%)`;
-    }
-</script>
+<!-- ═══════════════════════════  PROJECTS  ═══════════════════════════ -->
+<section id="work" class="max-w-7xl mx-auto py-24 px-6 md:px-10">
+  <div class="section-label">03. Work</div>
 
-<!-- FOOTER -->
-<footer id="contact" class="text-center py-4 border-t border-white/5">
-    <h2 class="text-[#d4af37] mono text-xs uppercase tracking-widest">
-        Designed & Built by Nabila ELN © 2026
-    </h2>
+  <!-- Featured Slider -->
+  <div class="relative group overflow-hidden rounded-xl bg-[#2d0a0a] border border-white/5 mb-20 shadow-2xl">
+    <div id="main-slider" class="flex transition-transform duration-700 ease-in-out">
+
+      <!-- ELINSI -->
+      <div class="min-w-full p-12 md:p-24 flex flex-col items-center text-center relative cursor-pointer"
+           onclick="openModal('elinsi')">
+        <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <div class="w-full h-full bg-cover bg-center bg-no-repeat opacity-20" style="background-image: url('/img/elinsi.png');"></div>
+          <div class="absolute inset-0 bg-[#2d0a0a]/40"></div>
+        </div>
+        <div class="relative z-10">
+          <span class="text-[#d4af37] mono text-xs tracking-[0.4em] uppercase mb-4 block">Autonomous System</span>
+          <h4 class="text-4xl md:text-6xl font-bold text-white mb-6">ELINSI</h4>
+          <p class="text-slate-400 max-w-xl mx-auto text-lg mb-10 leading-relaxed">
+            A high-performance Python backend powering ELINSI — an autonomous hiring engine built with FastAPI and optimized SQL schemas.
+          </p>
+          <div class="flex justify-center gap-4">
+            <button class="px-8 py-3 bg-[#d4af37] text-[#1a0505] font-bold text-xs uppercase tracking-widest hover:bg-[#f1c40f] transition">View Details</button>
+            <a href="https://www.elinsi.online/" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="px-8 py-3 border border-[#d4af37]/40 text-[#d4af37] font-bold text-xs uppercase tracking-widest hover:border-[#d4af37] transition">Visit Site</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- APOLO -->
+      <div class="min-w-full p-12 md:p-24 flex flex-col items-center text-center relative cursor-pointer"
+           onclick="openModal('apolo')">
+        <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <div class="w-full h-full bg-cover bg-center bg-no-repeat opacity-20" style="background-image: url('/img/apolo.png');"></div>
+          <div class="absolute inset-0 bg-[#2d0a0a]/40"></div>
+        </div>
+        <div class="relative z-10">
+          <span class="text-[#d4af37] mono text-xs tracking-[0.4em] uppercase mb-4 block">Financial Platform</span>
+          <h4 class="text-4xl md:text-6xl font-bold text-white mb-6">APOLO Suite</h4>
+          <p class="text-slate-400 max-w-xl mx-auto text-lg mb-10 leading-relaxed">
+            A financial analysis platform for backtesting trading strategies using real-time dashboards and optimized ingestion pipelines.
+          </p>
+          <div class="flex justify-center gap-4">
+            <button class="px-8 py-3 bg-[#d4af37] text-[#1a0505] font-bold text-xs uppercase tracking-widest hover:bg-[#f1c40f] transition">View Details</button>
+            <a href="https://github.com/NabilaEln48/Apolo" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="px-8 py-3 border border-[#d4af37]/40 text-[#d4af37] font-bold text-xs uppercase tracking-widest hover:border-[#d4af37] transition">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PTFMS -->
+      <div class="min-w-full p-12 md:p-24 flex flex-col items-center text-center relative cursor-pointer"
+           onclick="openModal('ptfms')">
+        <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <div class="w-full h-full bg-cover bg-center bg-no-repeat opacity-20" style="background-image: url('/img/ptfms.png');"></div>
+          <div class="absolute inset-0 bg-[#2d0a0a]/40"></div>
+        </div>
+        <div class="relative z-10">
+          <span class="text-[#d4af37] mono text-xs tracking-[0.4em] uppercase mb-4 block">Enterprise System</span>
+          <h4 class="text-4xl md:text-6xl font-bold text-white mb-6">PTFMS Fleet</h4>
+          <p class="text-slate-400 max-w-xl mx-auto text-lg mb-10 leading-relaxed">
+            Java-based enterprise application for public-transport fleet operations with secure auth and CRUD workflows.
+          </p>
+          <div class="flex justify-center gap-4">
+            <button class="px-8 py-3 bg-[#d4af37] text-[#1a0505] font-bold text-xs uppercase tracking-widest hover:bg-[#f1c40f] transition">View Details</button>
+            <a href="https://github.com/NabilaEln48/Public-Transit-Fleet-Management-System" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="px-8 py-3 border border-[#d4af37]/40 text-[#d4af37] font-bold text-xs uppercase tracking-widest hover:border-[#d4af37] transition">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button onclick="moveWorkSlide(-1)" aria-label="Previous" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 text-white/20 hover:text-[#d4af37] transition">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button onclick="moveWorkSlide(1)" aria-label="Next" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 text-white/20 hover:text-[#d4af37] transition">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+
+    <!-- Dots -->
+    <div class="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+      <button onclick="goToSlide(0)" class="slide-dot w-2 h-2 rounded-full bg-[#d4af37] transition-all"></button>
+      <button onclick="goToSlide(1)" class="slide-dot w-2 h-2 rounded-full bg-white/20 transition-all"></button>
+      <button onclick="goToSlide(2)" class="slide-dot w-2 h-2 rounded-full bg-white/20 transition-all"></button>
+    </div>
+  </div>
+
+  <!-- Other Projects Grid -->
+<div class="flex items-center gap-4 mb-10">
+  <h2 class="text-xl font-bold text-white tracking-tight italic">/ Other Projects</h2>
+  <div class="h-[1px] flex-grow bg-[#d4af37]/10"></div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+  <!-- Secure Doc -->
+  <div onclick="openModal('secure-doc')" class="cursor-pointer bg-[#250808] rounded-lg border border-white/5 card-hover group overflow-hidden">
+    <div class="h-40 overflow-hidden relative">
+      <img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=600&q=80"
+           alt="Secure Document API"
+           class="w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-500">
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#250808]"></div>
+    </div>
+    <div class="p-7 pt-5">
+      <h3 class="text-base font-bold text-white mb-2 group-hover:text-[#d4af37] transition-colors">Secure Document API</h3>
+      <p class="text-slate-500 text-sm mb-5 leading-relaxed">Python-based API for encrypted document storage featuring JWT and RBAC access control.</p>
+      <div class="flex flex-wrap gap-2"><span class="tag">Java</span><span class="tag">Servlets</span><span class="tag">JWT</span></div>
+    </div>
+  </div>
+
+  <!-- BookRegistry -->
+  <div onclick="openModal('bookregistry')" class="cursor-pointer bg-[#250808] rounded-lg border border-white/5 card-hover group overflow-hidden">
+    <div class="h-40 overflow-hidden relative">
+      <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&q=80"
+           alt="BookRegistryApp"
+           class="w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-500">
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#250808]"></div>
+    </div>
+    <div class="p-7 pt-5">
+      <h3 class="text-base font-bold text-white mb-2 group-hover:text-[#d4af37] transition-colors">BookRegistryApp</h3>
+      <p class="text-slate-500 text-sm mb-5 leading-relaxed">CRUD application implementing Singleton and Factory design patterns for clean backend architecture.</p>
+      <div class="flex flex-wrap gap-2"><span class="tag">Java</span><span class="tag">JSP</span><span class="tag">Design Patterns</span></div>
+    </div>
+  </div>
+
+  <!-- Pacman -->
+  <div onclick="openModal('pacman')" class="cursor-pointer bg-[#250808] rounded-lg border border-white/5 card-hover group overflow-hidden">
+    <div class="h-40 overflow-hidden relative flex items-center justify-center bg-black">
+      <img src="/img/pac.png"
+           alt="Pacman AI Edition"
+           class="h-24 w-auto object-contain opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 drop-shadow-[0_0_18px_rgba(255,220,0,0.5)]">
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#250808]"></div>
+    </div>
+    <div class="p-7 pt-5">
+      <h3 class="text-base font-bold text-white mb-2 group-hover:text-[#d4af37] transition-colors">Pacman — AI Edition</h3>
+      <p class="text-slate-500 text-sm mb-5 leading-relaxed">Logic-heavy implementation with BFS/DFS pathfinding AI governing ghost behaviour.</p>
+      <div class="flex flex-wrap gap-2"><span class="tag">Python</span><span class="tag">AI</span><span class="tag">Pathfinding</span></div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ═══════════════════════════  ART  ═══════════════════════════ -->
+<section id="art" class="max-w-7xl mx-auto py-20 lg:py-28 px-6 md:px-10">
+  <div class="flex items-end justify-between mb-10">
+    <div class="section-label mb-0">04. Art</div>
+    <a href="art.html" class="mono text-xs text-[#d4af37]/60 hover:text-[#d4af37] transition uppercase tracking-widest flex items-center gap-2">
+      View All
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+
+  <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+    <!-- Art pieces — replace src with your actual art images -->
+    <div class="art-item col-span-2 md:col-span-1" style="height: 280px;">
+      <img src="/img/1.png" alt="Art piece 1 by Nabila ELN" loading="lazy"
+           onerror="this.parentElement.style.background='#2d0a0a'; this.style.display='none'; this.parentElement.innerHTML += '<div style=\'height:100%;display:flex;align-items:center;justify-content:center;\'><span style=\'color:#d4af37;font-family:Fira Code,monospace;font-size:0.7rem;opacity:0.4;\'>art_01.jpg</span></div>'">
+    </div>
+    <div class="art-item" style="height: 280px;">
+      <img src="/img/2.png" alt="Art piece 2 by Nabila ELN" loading="lazy"
+           onerror="this.parentElement.style.background='#2d0a0a'; this.style.display='none'; this.parentElement.innerHTML += '<div style=\'height:100%;display:flex;align-items:center;justify-content:center;\'><span style=\'color:#d4af37;font-family:Fira Code,monospace;font-size:0.7rem;opacity:0.4;\'>art_02.jpg</span></div>'">
+    </div>
+    <div class="art-item" style="height: 280px;">
+      <img src="/img/3.png" alt="Art piece 3 by Nabila ELN" loading="lazy"
+           onerror="this.parentElement.style.background='#2d0a0a'; this.style.display='none'; this.parentElement.innerHTML += '<div style=\'height:100%;display:flex;align-items:center;justify-content:center;\'><span style=\'color:#d4af37;font-family:Fira Code,monospace;font-size:0.7rem;opacity:0.4;\'>art_03.jpg</span></div>'">
+    </div>
+    <div class="art-item hidden md:block" style="height: 220px;">
+      <img src="/img/4.png" alt="Art piece 4 by Nabila ELN" loading="lazy"
+           onerror="this.parentElement.style.background='#2d0a0a'; this.style.display='none'; this.parentElement.innerHTML += '<div style=\'height:100%;display:flex;align-items:center;justify-content:center;\'><span style=\'color:#d4af37;font-family:Fira Code,monospace;font-size:0.7rem;opacity:0.4;\'>art_04.jpg</span></div>'">
+    </div>
+    <div class="art-item hidden md:block" style="height: 220px;">
+      <img src="/img/5.jpg" alt="Art piece 5 by Nabila ELN" loading="lazy"
+           onerror="this.parentElement.style.background='#2d0a0a'; this.style.display='none'; this.parentElement.innerHTML += '<div style=\'height:100%;display:flex;align-items:center;justify-content:center;\'><span style=\'color:#d4af37;font-family:Fira Code,monospace;font-size:0.7rem;opacity:0.4;\'>art_05.jpg</span></div>'">
+    </div>
+    <!-- See More Tile -->
+    <a href="art.html" class="art-item hidden md:flex flex-col items-center justify-center gap-3 bg-[#2d0a0a] no-underline" style="height: 220px;">
+      <div class="w-12 h-12 rounded-full border border-[#d4af37]/30 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+      <span class="mono text-[10px] text-[#d4af37]/50 uppercase tracking-widest">View All Art</span>
+    </a>
+  </div>
+
+  <!-- Mobile see-all link -->
+  <div class="mt-6 flex md:hidden justify-center">
+    <a href="art.html" class="px-8 py-3 border border-[#d4af37]/30 text-[#d4af37] mono text-xs uppercase tracking-widest hover:border-[#d4af37] transition">
+      View All Art →
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════  BLOG  ═══════════════════════════ -->
+<section id="blog" class="max-w-7xl mx-auto py-20 lg:py-28 px-6 md:px-10">
+  <div class="flex items-end justify-between mb-10">
+    <div class="section-label mb-0">05. Blog</div>
+  </div>
+
+  <div class="flex flex-col items-center justify-center py-20 border border-dashed border-[#d4af37]/15 rounded-sm">
+    <span class="mono text-[10px] text-[#d4af37]/40 uppercase tracking-[0.4em] mb-4">// coming soon</span>
+    <h3 class="text-white/20 font-extrabold text-4xl md:text-5xl tracking-tight">Posts incoming.</h3>
+    <p class="text-slate-600 mono text-xs mt-4 max-w-sm text-center leading-relaxed">
+      Writing in progress — thoughts on systems, code, and everything in between.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════  PHOTOGRAPHY  ═══════════════════════════ -->
+<section id="photography" class="max-w-7xl mx-auto py-20 lg:py-28 px-6 md:px-10">
+  <div class="flex items-end justify-between mb-10">
+    <div class="section-label mb-0">06. Photography</div>
+    <a href="art.html" class="mono text-xs text-[#d4af37]/60 hover:text-[#d4af37] transition uppercase tracking-widest flex items-center gap-2">
+      View All
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+
+  <!-- 3-column film-strip style preview -->
+  <div class="grid grid-cols-3 gap-3 md:gap-4 mb-6">
+    <!-- Shot 1 — tall left -->
+    <div class="row-span-2 overflow-hidden rounded-lg border border-white/5 group cursor-pointer relative" style="height:380px;"
+         onclick="window.location='photography.html'">
+      <img src="/img/h.jpg" alt="Photography — 001"
+           class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition duration-500"
+           onerror="this.parentElement.style.background='#1c0606'; this.style.display='none'; this.parentElement.innerHTML+='<div style=\'height:100%;display:flex;align-items:center;justify-content:center;\'><span style=\'color:#d4af37;opacity:0.2;font-size:2.5rem;\'>📷</span></div>'">
+      <div class="absolute inset-0 bg-gradient-to-t from-[#1a0505]/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+        <span class="mono text-[10px] text-[#d4af37]/70 uppercase tracking-widest">001</span>
+      </div>
+      <div class="absolute top-3 left-3 w-1.5 h-1.5 rounded-full bg-[#d4af37]/40"></div>
+    </div>
+    <!-- Shot 2 -->
+    <div class="overflow-hidden rounded-lg border border-white/5 group cursor-pointer relative" style="height:182px;"
+         onclick="window.location='photography.html'">
+      <img src="/img/b.jpg" alt="Photography — 002"
+           class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition duration-500"
+           onerror="this.parentElement.style.background='#1c0606'; this.style.display='none'; this.parentElement.innerHTML+='<div style=\'height:100%;display:flex;align-items:center;justify-content:center;\'><span style=\'color:#d4af37;opacity:0.2;font-size:1.5rem;\'>📷</span></div>'">
+      <div class="absolute top-3 left-3 w-1.5 h-1.5 rounded-full bg-[#d4af37]/40"></div>
+    </div>
+    <!-- Shot 3 -->
+    <div class="overflow-hidden rounded-lg border border-white/5 group cursor-pointer relative" style="height:182px;"
+         onclick="window.location='photography.html'">
+      <img src="/img/d.jpg" alt="Photography — 003"
+           class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition duration-500"
+           onerror="this.parentElement.style.background='#1c0606'; this.style.display='none'; this.parentElement.innerHTML+='<div style=\'height:100%;display:flex;align-items:center;justify-content:center;\'><span style=\'color:#d4af37;opacity:0.2;font-size:1.5rem;\'>📷</span></div>'">
+      <div class="absolute top-3 left-3 w-1.5 h-1.5 rounded-full bg-[#d4af37]/40"></div>
+    </div>
+    <!-- Shot 4 -->
+    <div class="overflow-hidden rounded-lg border border-white/5 group cursor-pointer relative" style="height:182px;"
+         onclick="window.location='photography.html'">
+      <img src="/img/e.jpg" alt="Photography — 004"
+           class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition duration-500"
+           onerror="this.parentElement.style.background='#1c0606'; this.style.display='none'; this.parentElement.innerHTML+='<div style=\'height:100%;display:flex;align-items:center;justify-content:center;\'><span style=\'color:#d4af37;opacity:0.2;font-size:1.5rem;\'>📷</span></div>'">
+      <div class="absolute top-3 left-3 w-1.5 h-1.5 rounded-full bg-[#d4af37]/40"></div>
+    </div>
+    <!-- See All tile -->
+    <a href="photography.html"
+       class="overflow-hidden rounded-lg border border-[#d4af37]/10 hover:border-[#d4af37]/40 flex flex-col items-center justify-center gap-3 bg-[#2d0a0a] transition group"
+       style="height:182px;">
+      <div class="w-10 h-10 rounded-full border border-[#d4af37]/25 flex items-center justify-center group-hover:border-[#d4af37]/60 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+      <span class="mono text-[10px] text-[#d4af37]/40 group-hover:text-[#d4af37]/70 uppercase tracking-widest transition">All Photos</span>
+    </a>
+  </div>
+
+  <!-- caption strip -->
+  <p class="mono text-[10px] text-slate-600 uppercase tracking-[0.25em] text-center">
+    35mm &nbsp;·&nbsp; Street &nbsp;·&nbsp; Architecture &nbsp;·&nbsp; Light &amp; Shadow
+  </p>
+</section>
+
+<!-- ═══════════════════════════  FOOTER  ═══════════════════════════ -->
+<footer id="contact" class="text-center py-6 border-t border-white/5 mt-10">
+  <h2 class="text-[#d4af37] mono text-xs uppercase tracking-widest">
+    Designed &amp; Built by Nabila ELN © 2026
+  </h2>
 </footer>
 
+<!-- ═══════════════════════════  PROJECT MODAL  ═══════════════════════════ -->
+<div id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div id="modal-inner">
+    <!-- Close -->
+    <button onclick="closeModal()" class="absolute top-5 right-5 z-50 text-white/40 hover:text-[#d4af37] transition" aria-label="Close">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <!-- Image banner -->
+    <div id="modal-image" class="w-full h-52 md:h-64 bg-[#1a0505] overflow-hidden rounded-t-xl">
+      <img id="modal-img-el" src="" alt="" class="w-full h-full object-cover opacity-80">
+    </div>
+
+    <!-- Content -->
+    <div class="p-8 md:p-10">
+      <span id="modal-category" class="mono text-[10px] tracking-[0.35em] uppercase text-[#d4af37]/70 mb-3 block"></span>
+      <h2 id="modal-title" class="text-3xl md:text-4xl font-bold text-white mb-4"></h2>
+      <p id="modal-desc" class="text-slate-400 text-base leading-relaxed mb-6"></p>
+
+      <!-- Highlights -->
+      <div id="modal-highlights" class="mb-6 space-y-2"></div>
+
+      <!-- Stack -->
+      <div class="mb-8">
+        <p class="mono text-[10px] uppercase tracking-widest text-slate-600 mb-3">Stack</p>
+        <div id="modal-tags" class="flex flex-wrap gap-2"></div>
+      </div>
+
+      <!-- Links -->
+      <div id="modal-links" class="flex flex-wrap gap-3"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════  SCRIPTS  ═══════════════════════════ -->
+<script>
+  /* ── Mobile nav ── */
+  document.getElementById('mobile-toggle').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+  });
+  document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.add('hidden');
+  }));
+
+  /* ── Slider ── */
+  let currentWorkSlide = 0;
+  function moveWorkSlide(n) {
+    const slider = document.getElementById('main-slider');
+    const total  = slider.children.length;
+    currentWorkSlide = (currentWorkSlide + n + total) % total;
+    updateSlider();
+  }
+  function goToSlide(i) {
+    currentWorkSlide = i;
+    updateSlider();
+  }
+  function updateSlider() {
+    document.getElementById('main-slider').style.transform = `translateX(-${currentWorkSlide * 100}%)`;
+    document.querySelectorAll('.slide-dot').forEach((d, i) => {
+      d.style.background = i === currentWorkSlide ? '#d4af37' : 'rgba(255,255,255,0.2)';
+      d.style.width = i === currentWorkSlide ? '1.5rem' : '0.5rem';
+      d.style.borderRadius = '9999px';
+    });
+  }
+
+  /* ── Project data ── */
+  const projects = {
+    'elinsi': {
+      category: 'Autonomous System / SaaS',
+      title: 'ELINSI',
+      image: '/img/elinsi.png',
+      desc: 'ELINSI is an autonomous hiring engine architected for speed and scale. The backend is a high-performance FastAPI application with async workers, an optimized PostgreSQL schema designed for sub-20ms latency, and ML-powered candidate matching that removes recruiter bottlenecks entirely.',
+      highlights: [
+        '⚡ Async FastAPI pipeline processing hundreds of simultaneous job applications',
+        '🗄️ PostgreSQL schema with advanced indexing — sub-20ms P95 query latency',
+        '🤖 ML-powered candidate ranking and automated screening',
+        '🐳 Containerized with Docker, deployed with zero-downtime strategies',
+      ],
+      tags: ['Python', 'FastAPI', 'PostgreSQL', 'Docker', 'ML', 'Async', 'REST API'],
+      links: [
+        { label: 'Visit Website', href: 'https://www.elinsi.online/', primary: true },
+      ]
+    },
+    'apolo': {
+      category: 'Financial Platform',
+      title: 'APOLO Suite',
+      image: '/img/apolo.png',
+      desc: 'A full financial analysis platform built for backtesting algorithmic trading strategies. Features real-time market data ingestion, interactive performance dashboards, and optimized data pipelines that handle large historical datasets without memory bottlenecks.',
+      highlights: [
+        '📈 Backtesting engine supporting multiple strategy types simultaneously',
+        '⚙️ Optimized data ingestion pipeline with chunked streaming',
+        '📊 Real-time dashboard for live P&L and drawdown visualization',
+        '🔬 Modular architecture — swap strategies without touching core logic',
+      ],
+      tags: ['Python', 'Pandas', 'PostgreSQL', 'Data Viz', 'Async', 'Finance'],
+      links: [
+        { label: 'GitHub', href: 'https://github.com/NabilaEln48/Apolo', primary: true },
+      ]
+    },
+    'ptfms': {
+      category: 'Enterprise System',
+      title: 'PTFMS Fleet',
+      image: '/img/ptfms.png',
+      desc: 'A Java enterprise application for managing public-transport fleet operations. Handles vehicle scheduling, driver assignment, route management, and maintenance tracking with role-based access control and comprehensive audit logging.',
+      highlights: [
+        '🔐 RBAC security model with admin, operator, and driver roles',
+        '🚌 Real-time fleet status and route assignment engine',
+        '📋 Full CRUD workflows with optimistic locking for concurrency',
+        '🗂️ Jakarta EE architecture designed for enterprise-grade scalability',
+      ],
+      tags: ['Java', 'Jakarta EE', 'Hibernate', 'MySQL', 'RBAC', 'MVC'],
+      links: [
+        { label: 'GitHub', href: 'https://github.com/NabilaEln48/Public-Transit-Fleet-Management-System', primary: true },
+      ]
+    },
+    'secure-doc': {
+  category: 'Security / API',
+  title: 'Secure Document API',
+  image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=900&q=80',
+  desc: 'A robust Java Servlet-based API for managing encrypted documents. Implements JWT authentication, role-based access control (RBAC), and AES encryption for document storage. Designed with a security-first mindset — every endpoint is protected and every action is audited.',
+  highlights: [
+    '🔑 JWT-based stateless authentication with refresh token rotation',
+    '🔒 AES-256 encryption for all stored documents',
+    '👥 Granular RBAC: owner, editor, viewer permission levels',
+    '📝 Full audit trail for every access and modification event',
+  ],
+  tags: ['Java', 'Servlets', 'JWT', 'AES Encryption', 'RBAC', 'Security'],
+  links: [
+    { label: 'GitHub', href: 'https://github.com/NabilaEln48/Secure-Document-Management-API', primary: true },
+  ]
+},
+'bookregistry': {
+  category: 'CRUD Application',
+  title: 'BookRegistryApp',
+  image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=900&q=80',
+  desc: 'A clean, well-architected CRUD application for book management built with Java and JSP. Implements the Singleton pattern for database connection management and the Factory pattern for flexible object creation — textbook clean architecture in a practical project.',
+  highlights: [
+    '🏭 Factory pattern for flexible Book object instantiation',
+    '🔗 Singleton connection pool for efficient DB access',
+    '🎨 JSP views with clean separation of concerns (MVC)',
+    '✅ Full CRUD: create, search, update, delete with validation',
+  ],
+  tags: ['Java', 'JSP', 'JDBC', 'Singleton', 'Factory Pattern', 'MySQL'],
+  links: [
+    { label: 'GitHub', href: 'https://github.com/NabilaEln48/BookRegistryApp', primary: true },
+  ]
+},
+'pacman': {
+  category: 'Game / AI',
+  title: 'Pacman — AI Edition',
+  image: '/img/pac.png',
+  desc: 'A faithful Python recreation of Pacman with a twist — the ghosts use real pathfinding algorithms. BFS drives Blinky\'s direct chase behaviour while DFS governs Pinky\'s ambush strategy, making the game meaningfully challenging without scripted paths.',
+  highlights: [
+    '🧠 BFS pathfinding for direct-chase ghost AI',
+    '🌀 DFS-based ambush strategy for a second ghost variant',
+    '🎮 Smooth Pygame rendering at 60fps with collision detection',
+    '⚙️ Modular AI brain — swap algorithms per ghost independently',
+  ],
+  tags: ['Python', 'Pygame', 'BFS', 'DFS', 'AI', 'Algorithms'],
+  links: [
+    { label: 'GitHub', href: 'https://github.com/NabilaEln48/Pacman_Game', primary: true },
+  ]
+},
+  };
+
+  function openModal(id) {
+    const p = projects[id];
+    if (!p) return;
+    document.getElementById('modal-img-el').src = p.image;
+    document.getElementById('modal-img-el').alt = p.title;
+    document.getElementById('modal-category').textContent = p.category;
+    document.getElementById('modal-title').textContent = p.title;
+    document.getElementById('modal-desc').textContent = p.desc;
+
+    // highlights
+    const hl = document.getElementById('modal-highlights');
+    hl.innerHTML = p.highlights.map(h =>
+      `<div class="flex items-start gap-3 text-sm text-slate-400 leading-relaxed">
+         <span class="text-[#d4af37] flex-shrink-0 mt-0.5">${h.slice(0,2)}</span>
+         <span>${h.slice(2)}</span>
+       </div>`
+    ).join('');
+
+    // tags
+    document.getElementById('modal-tags').innerHTML = p.tags.map(t =>
+      `<span class="tag">${t}</span>`
+    ).join('');
+
+    // links
+    document.getElementById('modal-links').innerHTML = p.links.map(l =>
+      l.primary
+        ? `<a href="${l.href}" target="_blank" rel="noopener noreferrer" class="px-7 py-2.5 bg-[#d4af37] text-[#1a0505] font-bold mono text-xs uppercase tracking-widest hover:bg-[#f1c40f] transition rounded-sm">${l.label}</a>`
+        : `<a href="${l.href}" target="_blank" rel="noopener noreferrer" class="px-7 py-2.5 border border-[#d4af37]/30 text-[#d4af37] mono text-xs uppercase tracking-widest hover:border-[#d4af37] transition rounded-sm">${l.label}</a>`
+    ).join('');
+
+    document.getElementById('project-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('project-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('project-modal').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('project-modal')) closeModal();
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+</script>
 </body>
 </html>

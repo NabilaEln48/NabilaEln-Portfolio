@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art — Nabila ELN</title>
+    <meta name="description" content="Visual art and creative work by Nabila ELN — digital art, illustrations, photography, and creative experiments.">
+    <link rel="icon" type="image/png" href="/img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root { --gold: #d4af37; --bg: #1a0505; --surface: #2d0a0a; }
+        body { font-family: 'Syne', sans-serif; background: var(--bg); color: #cbd5e1; }
+        .mono { font-family: 'Fira Code', monospace; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+        .art-grid-item {
+            overflow: hidden;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), border-color 0.3s;
+        }
+        .art-grid-item:hover { transform: scale(1.02); border-color: rgba(212,175,55,0.45); }
+        .art-grid-item img, .art-grid-item video {
+            width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s;
+        }
+        .art-grid-item:hover img, .art-grid-item:hover video { transform: scale(1.07); }
+        .art-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(26,5,5,0.85) 0%, transparent 55%);
+            opacity: 0; transition: opacity 0.3s;
+            display: flex; align-items: flex-end; padding: 1.25rem;
+        }
+        .art-grid-item:hover .art-overlay { opacity: 1; }
+
+        /* HIDE/SHOW filter — no layout ghost */
+        .art-grid-item.hidden { display: none; }
+
+        .video-badge {
+            position: absolute; top: 0.75rem; right: 0.75rem;
+            width: 2rem; height: 2rem;
+            background: rgba(212,175,55,0.15); border: 1px solid rgba(212,175,55,0.4);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2;
+        }
+
+        #lightbox {
+            display: none; position: fixed; inset: 0; z-index: 9999;
+            background: rgba(10,2,2,0.92); backdrop-filter: blur(16px);
+            align-items: center; justify-content: center; padding: 2rem;
+        }
+        #lightbox.open { display: flex; }
+        #lightbox-img {
+            max-width: 90vw; max-height: 85vh; object-fit: contain;
+            border-radius: 0.5rem; border: 1px solid rgba(212,175,55,0.2);
+            animation: lbIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+        }
+        #lightbox-video {
+            display: none; max-width: 90vw; max-height: 85vh;
+            border-radius: 0.5rem; border: 1px solid rgba(212,175,55,0.2);
+            animation: lbIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+        }
+        #lightbox-video.active { display: block; }
+        @keyframes lbIn { from { opacity:0; transform:scale(0.88); } to { opacity:1; transform:scale(1); } }
+        #lightbox-caption {
+            position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+            font-family: 'Fira Code', monospace; font-size: 0.7rem; letter-spacing: 0.2em;
+            text-transform: uppercase; color: rgba(212,175,55,0.6); white-space: nowrap;
+        }
+
+        .tag {
+            font-family: 'Fira Code', monospace; font-size: 0.65rem; letter-spacing: 0.15em;
+            text-transform: uppercase; color: rgba(212,175,55,0.5);
+            padding: 0.2rem 0.6rem; border: 1px solid rgba(212,175,55,0.15); border-radius: 9999px;
+        }
+        .section-label {
+            font-family: 'Fira Code', monospace; font-size: 0.7rem; letter-spacing: 0.3em;
+            text-transform: uppercase; color: var(--gold);
+            display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem;
+        }
+        .section-label::before { content:''; display:block; width:3rem; height:1px; background:var(--gold); }
+
+        .filter-btn {
+            font-family: 'Fira Code', monospace; font-size: 0.65rem; letter-spacing: 0.15em;
+            text-transform: uppercase; padding: 0.4rem 1rem;
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 9999px;
+            color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.2s; background: transparent;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,0.08);
+        }
+
+        .placeholder-tile {
+            height: 100%; display: flex; align-items: center;
+            justify-content: center; flex-direction: column; gap: 0.75rem;
+        }
+    </style>
+</head>
+<body class="selection:bg-[#d4af37] selection:text-[#1a0505]">
+
+<nav class="fixed w-full z-50 bg-[#1a0505]/90 backdrop-blur-md border-b border-white/5">
+  <div class="p-5 flex items-center justify-between max-w-6xl mx-auto">
+    <a href="index.html" class="text-[#d4af37] font-bold text-2xl tracking-tighter mono">ELN<span class="text-white">.</span></a>
+    <a href="index.html" class="mono text-[10px] text-white/50 hover:text-[#d4af37] transition uppercase tracking-widest flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Back
+    </a>
+  </div>
+</nav>
+
+<section class="pt-32 pb-16 px-6 md:px-10 max-w-7xl mx-auto">
+  <div class="section-label">Art & Visuals</div>
+  <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6">
+    Creative<br><span class="text-[#d4af37]">Work.</span>
+  </h1>
+  <p class="text-slate-400 text-lg max-w-xl leading-relaxed mb-10">
+    Between debugging sessions and architecture docs, there's this. Drawings, photography,
+    and visual experiments — the other side of the screen.
+  </p>
+  <div class="flex flex-wrap gap-3" id="filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="drawing">Drawings</button>
+    <button class="filter-btn" data-filter="photography">Photography</button>
+    <button class="filter-btn" data-filter="video">Video</button>
+  </div>
+</section>
+
+<section class="px-6 md:px-10 pb-24 max-w-7xl mx-auto">
+  <div class="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4" id="art-grid">
+
+    <!-- DRAWINGS -->
+    <div class="art-grid-item break-inside-avoid" data-cat="drawing" style="height:320px;" onclick="openLightbox('/img/1.png','Drawing — 001')">
+      <img src="/img/1.png" alt="Drawing 001" onerror="makePlaceholder(this,'DRAWING — 001')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Drawing — 001</p><span class="tag mt-1 inline-block">Drawing</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="drawing" style="height:260px;" onclick="openLightbox('/img/2.png','Drawing — 002')">
+      <img src="/img/2.png" alt="Drawing 002" onerror="makePlaceholder(this,'DRAWING — 002')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Drawing — 002</p><span class="tag mt-1 inline-block">Drawing</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="drawing" style="height:380px;" onclick="openLightbox('/img/3.png','Drawing — 003')">
+      <img src="/img/3.png" alt="Drawing 003" onerror="makePlaceholder(this,'DRAWING — 003')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Drawing — 003</p><span class="tag mt-1 inline-block">Drawing</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="drawing" style="height:290px;" onclick="openLightbox('/img/4.png','Drawing — 004')">
+      <img src="/img/4.png" alt="Drawing 004" onerror="makePlaceholder(this,'DRAWING — 004')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Drawing — 004</p><span class="tag mt-1 inline-block">Drawing</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="drawing" style="height:350px;" onclick="openLightbox('/img/5.jpg','Drawing — 005')">
+      <img src="/img/5.jpg" alt="Drawing 005" onerror="makePlaceholder(this,'DRAWING — 005')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Drawing — 005</p><span class="tag mt-1 inline-block">Drawing</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="drawing" style="height:260px;" onclick="openLightbox('/img/6.png','Drawing — 006')">
+      <img src="/img/6.png" alt="Drawing 006" onerror="makePlaceholder(this,'DRAWING — 006')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Drawing — 006</p><span class="tag mt-1 inline-block">Drawing</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="drawing" style="height:300px;" onclick="openLightbox('/img/7.png','Drawing — 007')">
+      <img src="/img/7.png" alt="Drawing 007" onerror="makePlaceholder(this,'DRAWING — 007')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Drawing — 007</p><span class="tag mt-1 inline-block">Drawing</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="drawing" style="height:240px;" onclick="openLightbox('/img/8.png','Drawing — 008')">
+      <img src="/img/8.png" alt="Drawing 008" onerror="makePlaceholder(this,'DRAWING — 008')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Drawing — 008</p><span class="tag mt-1 inline-block">Drawing</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="drawing" style="height:340px;" onclick="openLightbox('/img/9.png','Drawing — 009')">
+      <img src="/img/9.png" alt="Drawing 009" onerror="makePlaceholder(this,'DRAWING — 009')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Drawing — 009</p><span class="tag mt-1 inline-block">Drawing</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="drawing" style="height:280px;" onclick="openLightbox('/img/10.jpg','Drawing — 010')">
+      <img src="/img/10.jpg" alt="Drawing 010" onerror="makePlaceholder(this,'DRAWING — 010')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Drawing — 010</p><span class="tag mt-1 inline-block">Drawing</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="drawing" style="height:360px;" onclick="openLightbox('/img/11.png','Drawing — 011')">
+      <img src="/img/11.png" alt="Drawing 011" onerror="makePlaceholder(this,'DRAWING — 011')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Drawing — 011</p><span class="tag mt-1 inline-block">Drawing</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="drawing" style="height:250px;" onclick="openLightbox('/img/12.png','Drawing — 012')">
+      <img src="/img/12.png" alt="Drawing 012" onerror="makePlaceholder(this,'DRAWING — 012')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Drawing — 012</p><span class="tag mt-1 inline-block">Drawing</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="drawing" style="height:310px;" onclick="openLightbox('/img/13.png','Drawing — 013')">
+      <img src="/img/13.png" alt="Drawing 013" onerror="makePlaceholder(this,'DRAWING — 013')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Drawing — 013</p><span class="tag mt-1 inline-block">Drawing</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="drawing" style="height:270px;" onclick="openLightbox('/img/14.jpg','Drawing — 014')">
+      <img src="/img/14.jpg" alt="Drawing 014" onerror="makePlaceholder(this,'DRAWING — 014')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Drawing — 014</p><span class="tag mt-1 inline-block">Drawing</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="drawing" style="height:330px;" onclick="openLightbox('/img/15.png','Drawing — 015')">
+      <img src="/img/15.png" alt="Drawing 015" onerror="makePlaceholder(this,'DRAWING — 015')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Drawing — 015</p><span class="tag mt-1 inline-block">Drawing</span></div></div>
+    </div>
+
+    <!-- PHOTOGRAPHY -->
+    <div class="art-grid-item break-inside-avoid" data-cat="photography" style="height:300px;" onclick="openLightbox('/img/a.jpg','Photo — A')">
+      <img src="/img/a.jpg" alt="Photo A" onerror="makePlaceholder(this,'PHOTO — A')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Photo — A</p><span class="tag mt-1 inline-block">Photography</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="photography" style="height:360px;" onclick="openLightbox('/img/b.jpg','Photo — B')">
+      <img src="/img/b.jpg" alt="Photo B" onerror="makePlaceholder(this,'PHOTO — B')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Photo — B</p><span class="tag mt-1 inline-block">Photography</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="photography" style="height:250px;" onclick="openLightbox('/img/c.jpg','Photo — C')">
+      <img src="/img/c.jpg" alt="Photo C" onerror="makePlaceholder(this,'PHOTO — C')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Photo — C</p><span class="tag mt-1 inline-block">Photography</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="photography" style="height:320px;" onclick="openLightbox('/img/d.jpg','Photo — D')">
+      <img src="/img/d.jpg" alt="Photo D" onerror="makePlaceholder(this,'PHOTO — D')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Photo — D</p><span class="tag mt-1 inline-block">Photography</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="photography" style="height:280px;" onclick="openLightbox('/img/e.jpg','Photo — E')">
+      <img src="/img/e.jpg" alt="Photo E" onerror="makePlaceholder(this,'PHOTO — E')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Photo — E</p><span class="tag mt-1 inline-block">Photography</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="photography" style="height:370px;" onclick="openLightbox('/img/f.jpg','Photo — F')">
+      <img src="/img/f.jpg" alt="Photo F" onerror="makePlaceholder(this,'PHOTO — F')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Photo — F</p><span class="tag mt-1 inline-block">Photography</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="photography" style="height:260px;" onclick="openLightbox('/img/g.jpg','Photo — G')">
+      <img src="/img/g.jpg" alt="Photo G" onerror="makePlaceholder(this,'PHOTO — G')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Photo — G</p><span class="tag mt-1 inline-block">Photography</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="photography" style="height:340px;" onclick="openLightbox('/img/h.jpg','Photo — H')">
+      <img src="/img/h.jpg" alt="Photo H" onerror="makePlaceholder(this,'PHOTO — H')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Photo — H</p><span class="tag mt-1 inline-block">Photography</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="photography" style="height:290px;" onclick="openLightbox('/img/i.jpg','Photo — I')">
+      <img src="/img/i.jpg" alt="Photo I" onerror="makePlaceholder(this,'PHOTO — I')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Photo — I</p><span class="tag mt-1 inline-block">Photography</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="photography" style="height:310px;" onclick="openLightbox('/img/j.jpg','Photo — J')">
+      <img src="/img/j.jpg" alt="Photo J" onerror="makePlaceholder(this,'PHOTO — J')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Photo — J</p><span class="tag mt-1 inline-block">Photography</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="photography" style="height:240px;" onclick="openLightbox('/img/k.jpg','Photo — K')">
+      <img src="/img/k.jpg" alt="Photo K" onerror="makePlaceholder(this,'PHOTO — K')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Photo — K</p><span class="tag mt-1 inline-block">Photography</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="photography" style="height:350px;" onclick="openLightbox('/img/l.jpg','Photo — L')">
+      <img src="/img/l.jpg" alt="Photo L" onerror="makePlaceholder(this,'PHOTO — L')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Photo — L</p><span class="tag mt-1 inline-block">Photography</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="photography" style="height:300px;" onclick="openLightbox('/img/m.jpg','Photo — M')">
+      <img src="/img/m.jpg" alt="Photo M" onerror="makePlaceholder(this,'PHOTO — M')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Photo — M</p><span class="tag mt-1 inline-block">Photography</span></div></div>
+    </div>
+    <div class="art-grid-item break-inside-avoid" data-cat="photography" style="height:300px;" onclick="openLightbox('/img/o.jpg','Photo — O')">
+      <img src="/img/o.jpg" alt="Photo O" onerror="makePlaceholder(this,'PHOTO — O')">
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Photo — O</p><span class="tag mt-1 inline-block">Photography</span></div></div>
+    </div>
+
+    <!-- VIDEO -->
+    <div class="art-grid-item break-inside-avoid" data-cat="video" style="height:360px;" onclick="openVideo('/img/n.MOV','Video — N')">
+      <video src="/img/n.MOV" muted loop playsinline preload="metadata" onerror="makePlaceholder(this,'VIDEO — N')"></video>
+      <div class="video-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="#d4af37"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </div>
+      <div class="art-overlay"><div><p class="text-white font-bold text-sm">Video — N</p><span class="tag mt-1 inline-block">Video</span></div></div>
+    </div>
+
+  </div>
+</section>
+
+<div id="lightbox" onclick="closeLightbox()">
+  <button class="absolute top-5 right-6 text-white/40 hover:text-[#d4af37] transition z-50" onclick="closeLightbox()" aria-label="Close">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+  <video id="lightbox-video" controls onclick="event.stopPropagation()"></video>
+  <div id="lightbox-caption"></div>
+</div>
+
+<footer class="text-center py-6 border-t border-white/5">
+  <a href="index.html" class="mono text-[10px] text-[#d4af37]/50 hover:text-[#d4af37] uppercase tracking-widest transition">← Back to Portfolio</a>
+</footer>
+
+<script>
+  function makePlaceholder(el, label) {
+    const parent = el.parentElement;
+    parent.style.background = '#2d0a0a';
+    el.style.display = 'none';
+    const div = document.createElement('div');
+    div.className = 'placeholder-tile';
+    div.innerHTML = `<span style="color:#d4af37;opacity:0.3;font-size:2rem;">◆</span>
+      <span style="color:#d4af37;font-family:'Fira Code',monospace;font-size:0.65rem;opacity:0.3;letter-spacing:0.2em;">${label}</span>`;
+    parent.insertBefore(div, parent.querySelector('.art-overlay'));
+  }
+
+  /* Filter — actually hide/show, no ghost layout */
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      document.querySelectorAll('#art-grid .art-grid-item').forEach(item => {
+        if (f === 'all' || item.dataset.cat === f) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  /* Hover-play thumbnail video */
+  document.querySelectorAll('.art-grid-item[data-cat="video"] video').forEach(v => {
+    const parent = v.closest('.art-grid-item');
+    parent.addEventListener('mouseenter', () => v.play());
+    parent.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0; });
+  });
+
+  function openLightbox(src, caption) {
+    const img = document.getElementById('lightbox-img');
+    const vid = document.getElementById('lightbox-video');
+    img.src = src; img.alt = caption; img.style.display = 'block';
+    vid.classList.remove('active'); vid.pause(); vid.src = '';
+    document.getElementById('lightbox-caption').textContent = caption;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function openVideo(src, caption) {
+    const img = document.getElementById('lightbox-img');
+    const vid = document.getElementById('lightbox-video');
+    img.style.display = 'none'; img.src = '';
+    vid.src = src; vid.classList.add('active');
+    document.getElementById('lightbox-caption').textContent = caption;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    vid.play();
+  }
+
+  function closeLightbox() {
+    const vid = document.getElementById('lightbox-video');
+    document.getElementById('lightbox').classList.remove('open');
+    vid.pause(); vid.src = '';
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>
