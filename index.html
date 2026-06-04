@@ -563,43 +563,52 @@
     </a>
   </div>
 
-  <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-    <!-- Art pieces — replace src with your actual art images -->
-    <div class="art-item col-span-2 md:col-span-1" style="height: 280px;">
-      <img src="/img/1.png" alt="Art piece 1 by Nabila ELN" loading="lazy"
-           onerror="this.parentElement.style.background='#2d0a0a'; this.style.display='none'; this.parentElement.innerHTML += '<div style=\'height:100%;display:flex;align-items:center;justify-content:center;\'><span style=\'color:#d4af37;font-family:Fira Code,monospace;font-size:0.7rem;opacity:0.4;\'>art_01.jpg</span></div>'">
-    </div>
-    <div class="art-item" style="height: 280px;">
-      <img src="/img/2.png" alt="Art piece 2 by Nabila ELN" loading="lazy"
-           onerror="this.parentElement.style.background='#2d0a0a'; this.style.display='none'; this.parentElement.innerHTML += '<div style=\'height:100%;display:flex;align-items:center;justify-content:center;\'><span style=\'color:#d4af37;font-family:Fira Code,monospace;font-size:0.7rem;opacity:0.4;\'>art_02.jpg</span></div>'">
-    </div>
-    <div class="art-item" style="height: 280px;">
-      <img src="/img/3.png" alt="Art piece 3 by Nabila ELN" loading="lazy"
-           onerror="this.parentElement.style.background='#2d0a0a'; this.style.display='none'; this.parentElement.innerHTML += '<div style=\'height:100%;display:flex;align-items:center;justify-content:center;\'><span style=\'color:#d4af37;font-family:Fira Code,monospace;font-size:0.7rem;opacity:0.4;\'>art_03.jpg</span></div>'">
-    </div>
-    <div class="art-item hidden md:block" style="height: 220px;">
-      <img src="/img/4.png" alt="Art piece 4 by Nabila ELN" loading="lazy"
-           onerror="this.parentElement.style.background='#2d0a0a'; this.style.display='none'; this.parentElement.innerHTML += '<div style=\'height:100%;display:flex;align-items:center;justify-content:center;\'><span style=\'color:#d4af37;font-family:Fira Code,monospace;font-size:0.7rem;opacity:0.4;\'>art_04.jpg</span></div>'">
-    </div>
-    <div class="art-item hidden md:block" style="height: 220px;">
-      <img src="/img/5.jpg" alt="Art piece 5 by Nabila ELN" loading="lazy"
-           onerror="this.parentElement.style.background='#2d0a0a'; this.style.display='none'; this.parentElement.innerHTML += '<div style=\'height:100%;display:flex;align-items:center;justify-content:center;\'><span style=\'color:#d4af37;font-family:Fira Code,monospace;font-size:0.7rem;opacity:0.4;\'>art_05.jpg</span></div>'">
-    </div>
-    <!-- See More Tile -->
-    <a href="art.html" class="art-item hidden md:flex flex-col items-center justify-center gap-3 bg-[#2d0a0a] no-underline" style="height: 220px;">
-      <div class="w-12 h-12 rounded-full border border-[#d4af37]/30 flex items-center justify-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
-      </div>
-      <span class="mono text-[10px] text-[#d4af37]/50 uppercase tracking-widest">View All Art</span>
-    </a>
-  </div>
+  <!-- Full-bleed strip — entire thing is a link -->
+  <a href="art.html" class="block group">
+    <div class="flex gap-2 md:gap-3 h-[300px] md:h-[400px] overflow-hidden rounded-lg">
 
-  <!-- Mobile see-all link -->
-  <div class="mt-6 flex md:hidden justify-center">
-    <a href="art.html" class="px-8 py-3 border border-[#d4af37]/30 text-[#d4af37] mono text-xs uppercase tracking-widest hover:border-[#d4af37] transition">
-      View All Art →
-    </a>
-  </div>
+      <!-- Art 1 — widest -->
+      <div class="relative flex-[2] overflow-hidden">
+        <img src="/img/1.png" alt="Art by Nabila ELN"
+             class="w-full h-full object-cover opacity-75 group-hover:opacity-60 transition duration-500 hover:!opacity-100 hover:scale-105"
+             onerror="this.parentElement.style.background='#2d0a0a'; this.style.display='none'">
+      </div>
+
+      <!-- Art 2 -->
+      <div class="relative flex-[1.2] overflow-hidden">
+        <img src="/img/2.png" alt="Art by Nabila ELN"
+             class="w-full h-full object-cover opacity-75 group-hover:opacity-60 transition duration-500 hover:!opacity-100 hover:scale-105"
+             onerror="this.parentElement.style.background='#2d0a0a'; this.style.display='none'">
+      </div>
+
+      <!-- Art 3 -->
+      <div class="relative flex-[1] overflow-hidden hidden sm:block">
+        <img src="/img/3.png" alt="Art by Nabila ELN"
+             class="w-full h-full object-cover opacity-75 group-hover:opacity-60 transition duration-500 hover:!opacity-100 hover:scale-105"
+             onerror="this.parentElement.style.background='#2d0a0a'; this.style.display='none'">
+      </div>
+
+      <!-- Art 4 -->
+      <div class="relative flex-[1] overflow-hidden hidden md:block">
+        <img src="/img/4.png" alt="Art by Nabila ELN"
+             class="w-full h-full object-cover opacity-75 group-hover:opacity-60 transition duration-500 hover:!opacity-100 hover:scale-105"
+             onerror="this.parentElement.style.background='#2d0a0a'; this.style.display='none'">
+      </div>
+
+      <!-- Art 5 — narrowest, with "see all" overlay -->
+      <div class="relative flex-[0.7] overflow-hidden hidden lg:block">
+        <img src="/img/5.jpg" alt="Art by Nabila ELN"
+             class="w-full h-full object-cover opacity-40 transition duration-500"
+             onerror="this.parentElement.style.background='#2d0a0a'; this.style.display='none'">
+        <div class="absolute inset-0 flex flex-col items-center justify-center gap-2">
+          <span class="mono text-[#d4af37] text-[10px] uppercase tracking-[0.25em] opacity-70">see all</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="opacity-60"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </div>
+
+    </div>
+  </a>
+
 </section>
 
 <!-- ═══════════════════════════  BLOG  ═══════════════════════════ -->
@@ -627,53 +636,53 @@
     </a>
   </div>
 
-  <!-- 3-column film-strip style preview -->
-  <div class="grid grid-cols-3 gap-3 md:gap-4 mb-6">
-    <!-- Shot 1 — tall left -->
-    <div class="row-span-2 overflow-hidden rounded-lg border border-white/5 group cursor-pointer relative" style="height:380px;"
-         onclick="window.location='photography.html'">
-      <img src="/img/h.jpg" alt="Photography — 001"
-           class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition duration-500"
-           onerror="this.parentElement.style.background='#1c0606'; this.style.display='none'; this.parentElement.innerHTML+='<div style=\'height:100%;display:flex;align-items:center;justify-content:center;\'><span style=\'color:#d4af37;opacity:0.2;font-size:2.5rem;\'>📷</span></div>'">
-      <div class="absolute inset-0 bg-gradient-to-t from-[#1a0505]/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
-        <span class="mono text-[10px] text-[#d4af37]/70 uppercase tracking-widest">001</span>
+  <!-- Masonry strip — 5 photos, no cards, just images -->
+  <a href="art.html" class="block group">
+    <div class="flex gap-2 md:gap-3 h-[340px] md:h-[420px] overflow-hidden rounded-lg">
+
+      <!-- Photo 1 — widest -->
+      <div class="relative flex-[2] overflow-hidden">
+        <img src="/img/h.jpg" alt="Photography preview"
+             class="w-full h-full object-cover opacity-75 group-hover:opacity-60 transition duration-500 hover:!opacity-100 hover:scale-105"
+             onerror="this.parentElement.style.background='#1c0606'; this.style.display='none'">
       </div>
-      <div class="absolute top-3 left-3 w-1.5 h-1.5 rounded-full bg-[#d4af37]/40"></div>
-    </div>
-    <!-- Shot 2 -->
-    <div class="overflow-hidden rounded-lg border border-white/5 group cursor-pointer relative" style="height:182px;"
-         onclick="window.location='photography.html'">
-      <img src="/img/b.jpg" alt="Photography — 002"
-           class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition duration-500"
-           onerror="this.parentElement.style.background='#1c0606'; this.style.display='none'; this.parentElement.innerHTML+='<div style=\'height:100%;display:flex;align-items:center;justify-content:center;\'><span style=\'color:#d4af37;opacity:0.2;font-size:1.5rem;\'>📷</span></div>'">
-      <div class="absolute top-3 left-3 w-1.5 h-1.5 rounded-full bg-[#d4af37]/40"></div>
-    </div>
-    <!-- Shot 3 -->
-    <div class="overflow-hidden rounded-lg border border-white/5 group cursor-pointer relative" style="height:182px;"
-         onclick="window.location='photography.html'">
-      <img src="/img/d.jpg" alt="Photography — 003"
-           class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition duration-500"
-           onerror="this.parentElement.style.background='#1c0606'; this.style.display='none'; this.parentElement.innerHTML+='<div style=\'height:100%;display:flex;align-items:center;justify-content:center;\'><span style=\'color:#d4af37;opacity:0.2;font-size:1.5rem;\'>📷</span></div>'">
-      <div class="absolute top-3 left-3 w-1.5 h-1.5 rounded-full bg-[#d4af37]/40"></div>
-    </div>
-    <!-- Shot 4 -->
-    <div class="overflow-hidden rounded-lg border border-white/5 group cursor-pointer relative" style="height:182px;"
-         onclick="window.location='photography.html'">
-      <img src="/img/e.jpg" alt="Photography — 004"
-           class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition duration-500"
-           onerror="this.parentElement.style.background='#1c0606'; this.style.display='none'; this.parentElement.innerHTML+='<div style=\'height:100%;display:flex;align-items:center;justify-content:center;\'><span style=\'color:#d4af37;opacity:0.2;font-size:1.5rem;\'>📷</span></div>'">
-      <div class="absolute top-3 left-3 w-1.5 h-1.5 rounded-full bg-[#d4af37]/40"></div>
-    </div>
-    <!-- See All tile -->
-    <a href="photography.html"
-       class="overflow-hidden rounded-lg border border-[#d4af37]/10 hover:border-[#d4af37]/40 flex flex-col items-center justify-center gap-3 bg-[#2d0a0a] transition group"
-       style="height:182px;">
-      <div class="w-10 h-10 rounded-full border border-[#d4af37]/25 flex items-center justify-center group-hover:border-[#d4af37]/60 transition">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
+
+      <!-- Photo 2 -->
+      <div class="relative flex-[1.2] overflow-hidden">
+        <img src="/img/b.jpg" alt="Photography preview"
+             class="w-full h-full object-cover opacity-75 group-hover:opacity-60 transition duration-500 hover:!opacity-100 hover:scale-105"
+             onerror="this.parentElement.style.background='#1c0606'; this.style.display='none'">
       </div>
-      <span class="mono text-[10px] text-[#d4af37]/40 group-hover:text-[#d4af37]/70 uppercase tracking-widest transition">All Photos</span>
-    </a>
-  </div>
+
+      <!-- Photo 3 -->
+      <div class="relative flex-[1] overflow-hidden hidden sm:block">
+        <img src="/img/d.jpg" alt="Photography preview"
+             class="w-full h-full object-cover opacity-75 group-hover:opacity-60 transition duration-500 hover:!opacity-100 hover:scale-105"
+             onerror="this.parentElement.style.background='#1c0606'; this.style.display='none'">
+      </div>
+
+      <!-- Photo 4 -->
+      <div class="relative flex-[1] overflow-hidden hidden md:block">
+        <img src="/img/e.jpg" alt="Photography preview"
+             class="w-full h-full object-cover opacity-75 group-hover:opacity-60 transition duration-500 hover:!opacity-100 hover:scale-105"
+             onerror="this.parentElement.style.background='#1c0606'; this.style.display='none'">
+      </div>
+
+      <!-- Photo 5 — narrowest, with overlay CTA -->
+      <div class="relative flex-[0.7] overflow-hidden hidden lg:block">
+        <img src="/img/f.jpg" alt="Photography preview"
+             class="w-full h-full object-cover opacity-40 transition duration-500"
+             onerror="this.parentElement.style.background='#1c0606'; this.style.display='none'">
+        <div class="absolute inset-0 flex flex-col items-center justify-center gap-2">
+          <span class="mono text-[#d4af37] text-[10px] uppercase tracking-[0.25em] opacity-70">see all</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="opacity-60"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </div>
+
+    </div>
+  </a>
+
+</section>
 
   <!-- caption strip -->
   <p class="mono text-[10px] text-slate-600 uppercase tracking-[0.25em] text-center">
