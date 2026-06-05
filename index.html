@@ -148,18 +148,69 @@
             left: -4.5px;
             top: 6px;
         }
+/* ════════════ ART / PHOTO ════════════ */
+.media-strip {
+  display: flex;
+  gap: 3px;
+  height: 420px;
+  overflow: hidden;
+}
+.media-strip-item {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: flex 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.media-strip:hover .media-strip-item { flex: 0.7; }
+.media-strip .media-strip-item:hover { flex: 2.5; }
 
-        /* ── art grid ── */
-        .art-item {
-            overflow: hidden;
-            border-radius: 0.5rem;
-            border: 1px solid rgba(255,255,255,0.05);
-            cursor: pointer;
-            transition: transform 0.4s, border-color 0.3s;
-        }
-        .art-item:hover { transform: scale(1.02); border-color: rgba(212,175,55,0.4); }
-        .art-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s; }
-        .art-item:hover img { transform: scale(1.06); }
+.media-strip-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s;
+  filter: sepia(20%) contrast(1.05);
+}
+.media-strip-item:hover img { transform: scale(1.03); filter: sepia(5%) contrast(1.08); }
+
+.media-strip-item .media-label {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.5);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.3s;
+  background: rgba(13,10,7,0.6);
+  padding: 0.3rem 0.6rem;
+}
+.media-strip-item:hover .media-label { opacity: 1; transform: translateY(0); }
+
+.media-cta-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(13,10,7,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.media-strip-item:hover .media-cta-overlay { opacity: 1; }
+.media-cta-text {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(184,146,42,0.4);
+  padding: 0.6rem 1.2rem;
+}
+
 
         /* ── blog card ── */
         .blog-card {
@@ -553,63 +604,88 @@
 </div>
 </section>
 
-<!-- ═══════════════════════════  ART  ═══════════════════════════ -->
-<section id="art" class="max-w-7xl mx-auto py-20 lg:py-28 px-6 md:px-10">
-  <div class="flex items-end justify-between mb-10">
-    <div class="section-label mb-0">04. Art</div>
-    <a href="art.html" class="mono text-xs text-[#d4af37]/60 hover:text-[#d4af37] transition uppercase tracking-widest flex items-center gap-2">
-      View All
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
-    </a>
-  </div>
-
-  <!-- Full-bleed strip — entire thing is a link -->
-  <a href="art.html" class="block group">
-    <div class="flex gap-2 md:gap-3 h-[300px] md:h-[400px] overflow-hidden rounded-lg">
-
-      <!-- Art 1 — widest -->
-      <div class="relative flex-[2] overflow-hidden">
-        <img src="/img/1.png" alt="Art by Nabila ELN"
-             class="w-full h-full object-cover opacity-75 group-hover:opacity-60 transition duration-500 hover:!opacity-100 hover:scale-105"
-             onerror="this.parentElement.style.background='#2d0a0a'; this.style.display='none'">
-      </div>
-
-      <!-- Art 2 -->
-      <div class="relative flex-[1.2] overflow-hidden">
-        <img src="/img/2.png" alt="Art by Nabila ELN"
-             class="w-full h-full object-cover opacity-75 group-hover:opacity-60 transition duration-500 hover:!opacity-100 hover:scale-105"
-             onerror="this.parentElement.style.background='#2d0a0a'; this.style.display='none'">
-      </div>
-
-      <!-- Art 3 -->
-      <div class="relative flex-[1] overflow-hidden hidden sm:block">
-        <img src="/img/3.png" alt="Art by Nabila ELN"
-             class="w-full h-full object-cover opacity-75 group-hover:opacity-60 transition duration-500 hover:!opacity-100 hover:scale-105"
-             onerror="this.parentElement.style.background='#2d0a0a'; this.style.display='none'">
-      </div>
-
-      <!-- Art 4 -->
-      <div class="relative flex-[1] overflow-hidden hidden md:block">
-        <img src="/img/4.png" alt="Art by Nabila ELN"
-             class="w-full h-full object-cover opacity-75 group-hover:opacity-60 transition duration-500 hover:!opacity-100 hover:scale-105"
-             onerror="this.parentElement.style.background='#2d0a0a'; this.style.display='none'">
-      </div>
-
-      <!-- Art 5 — narrowest, with "see all" overlay -->
-      <div class="relative flex-[0.7] overflow-hidden hidden lg:block">
-        <img src="/img/5.jpg" alt="Art by Nabila ELN"
-             class="w-full h-full object-cover opacity-40 transition duration-500"
-             onerror="this.parentElement.style.background='#2d0a0a'; this.style.display='none'">
-        <div class="absolute inset-0 flex flex-col items-center justify-center gap-2">
-          <span class="mono text-[#d4af37] text-[10px] uppercase tracking-[0.25em] opacity-70">see all</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="opacity-60"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
+<!-- ══ ART ══ -->
+<section id="art" style="background:var(--ink);padding:7rem 0;">
+  <div style="max-width:1400px;margin:0 auto;padding:0 4rem;">
+    <div style="display:flex;align-items:baseline;gap:1.5rem;margin-bottom:4rem;">
+      <span style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--gold);letter-spacing:0.3em;">04</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--paper);letter-spacing:0.04em;line-height:1;">Art</h2>
+      <div style="flex:1;height:1px;background:rgba(245,240,232,0.08);margin-bottom:0.4rem;"></div>
+      <a href="art.html" style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(212,175,55,0.5);text-decoration:none;white-space:nowrap;transition:color 0.2s;" onmouseover="this.style.color='#d4af37'" onmouseout="this.style.color='rgba(212,175,55,0.5)'">View All →</a>
+    </div>
+    <a href="art.html" style="display:block;text-decoration:none;">
+      <div class="media-strip">
+        <div class="media-strip-item">
+          <img src="/img/1.png" alt="Art">
+          <div class="media-label">No. 1</div>
+          <div class="media-cta-overlay"><span class="media-cta-text">View Gallery</span></div>
+        </div>
+        <div class="media-strip-item">
+          <img src="/img/2.png" alt="Art">
+          <div class="media-label">No. 2</div>
+          <div class="media-cta-overlay"><span class="media-cta-text">View Gallery</span></div>
+        </div>
+        <div class="media-strip-item">
+          <img src="/img/3.png" alt="Art">
+          <div class="media-label">No. 3</div>
+          <div class="media-cta-overlay"><span class="media-cta-text">View Gallery</span></div>
+        </div>
+        <div class="media-strip-item">
+          <img src="/img/4.png" alt="Art">
+          <div class="media-label">No. 4</div>
+          <div class="media-cta-overlay"><span class="media-cta-text">View Gallery</span></div>
+        </div>
+        <div class="media-strip-item">
+          <img src="/img/5.jpg" alt="Art">
+          <div class="media-label">No. 5</div>
+          <div class="media-cta-overlay"><span class="media-cta-text">View Gallery</span></div>
         </div>
       </div>
-
-    </div>
-  </a>
-
+    </a>
+  </div>
 </section>
+
+<!-- ══ PHOTOGRAPHY ══ -->
+<section id="photography" style="padding:7rem 0;">
+  <div style="max-width:1400px;margin:0 auto;padding:0 4rem;">
+    <div style="display:flex;align-items:baseline;gap:1.5rem;margin-bottom:4rem;">
+      <span style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--gold);letter-spacing:0.3em;">05</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;letter-spacing:0.04em;line-height:1;">Photography</h2>
+      <div style="flex:1;height:1px;background:var(--border);margin-bottom:0.4rem;"></div>
+      <a href="art.html" style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(184,146,42,0.5);text-decoration:none;white-space:nowrap;transition:color 0.2s;" onmouseover="this.style.color='#b8922a'" onmouseout="this.style.color='rgba(184,146,42,0.5)'">View All →</a>
+    </div>
+    <a href="art.html" style="display:block;text-decoration:none;">
+      <div class="media-strip" style="height:380px;">
+        <div class="media-strip-item">
+          <img src="/img/h.jpg" alt="Photo">
+          <div class="media-label">35mm</div>
+          <div class="media-cta-overlay"><span class="media-cta-text" style="color:var(--gold);border-color:rgba(184,146,42,0.4);">View Gallery</span></div>
+        </div>
+        <div class="media-strip-item">
+          <img src="/img/b.jpg" alt="Photo">
+          <div class="media-label">Street</div>
+          <div class="media-cta-overlay"><span class="media-cta-text" style="color:var(--gold);border-color:rgba(184,146,42,0.4);">View Gallery</span></div>
+        </div>
+        <div class="media-strip-item">
+          <img src="/img/d.jpg" alt="Photo">
+          <div class="media-label">Architecture</div>
+          <div class="media-cta-overlay"><span class="media-cta-text" style="color:var(--gold);border-color:rgba(184,146,42,0.4);">View Gallery</span></div>
+        </div>
+        <div class="media-strip-item">
+          <img src="/img/e.jpg" alt="Photo">
+          <div class="media-label">Light &amp; Shadow</div>
+          <div class="media-cta-overlay"><span class="media-cta-text" style="color:var(--gold);border-color:rgba(184,146,42,0.4);">View Gallery</span></div>
+        </div>
+        <div class="media-strip-item">
+          <img src="/img/f.jpg" alt="Photo">
+          <div class="media-cta-overlay"><span class="media-cta-text" style="color:var(--gold);border-color:rgba(184,146,42,0.4);">View Gallery</span></div>
+        </div>
+      </div>
+    </a>
+    <p style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--type-dim);text-align:center;margin-top:2rem;">35mm · Street · Architecture · Light &amp; Shadow</p>
+  </div>
+</section>
+
 
 <!-- ═══════════════════════════  BLOG  ═══════════════════════════ -->
 <section id="blog" class="max-w-7xl mx-auto py-20 lg:py-28 px-6 md:px-10">
@@ -626,69 +702,6 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════  PHOTOGRAPHY  ═══════════════════════════ -->
-<section id="photography" class="max-w-7xl mx-auto py-20 lg:py-28 px-6 md:px-10">
-  <div class="flex items-end justify-between mb-10">
-    <div class="section-label mb-0">06. Photography</div>
-    <a href="art.html" class="mono text-xs text-[#d4af37]/60 hover:text-[#d4af37] transition uppercase tracking-widest flex items-center gap-2">
-      View All
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
-    </a>
-  </div>
-
-  <!-- Masonry strip — 5 photos, no cards, just images -->
-  <a href="art.html" class="block group">
-    <div class="flex gap-2 md:gap-3 h-[340px] md:h-[420px] overflow-hidden rounded-lg">
-
-      <!-- Photo 1 — widest -->
-      <div class="relative flex-[2] overflow-hidden">
-        <img src="/img/h.jpg" alt="Photography preview"
-             class="w-full h-full object-cover opacity-75 group-hover:opacity-60 transition duration-500 hover:!opacity-100 hover:scale-105"
-             onerror="this.parentElement.style.background='#1c0606'; this.style.display='none'">
-      </div>
-
-      <!-- Photo 2 -->
-      <div class="relative flex-[1.2] overflow-hidden">
-        <img src="/img/b.jpg" alt="Photography preview"
-             class="w-full h-full object-cover opacity-75 group-hover:opacity-60 transition duration-500 hover:!opacity-100 hover:scale-105"
-             onerror="this.parentElement.style.background='#1c0606'; this.style.display='none'">
-      </div>
-
-      <!-- Photo 3 -->
-      <div class="relative flex-[1] overflow-hidden hidden sm:block">
-        <img src="/img/d.jpg" alt="Photography preview"
-             class="w-full h-full object-cover opacity-75 group-hover:opacity-60 transition duration-500 hover:!opacity-100 hover:scale-105"
-             onerror="this.parentElement.style.background='#1c0606'; this.style.display='none'">
-      </div>
-
-      <!-- Photo 4 -->
-      <div class="relative flex-[1] overflow-hidden hidden md:block">
-        <img src="/img/e.jpg" alt="Photography preview"
-             class="w-full h-full object-cover opacity-75 group-hover:opacity-60 transition duration-500 hover:!opacity-100 hover:scale-105"
-             onerror="this.parentElement.style.background='#1c0606'; this.style.display='none'">
-      </div>
-
-      <!-- Photo 5 — narrowest, with overlay CTA -->
-      <div class="relative flex-[0.7] overflow-hidden hidden lg:block">
-        <img src="/img/f.jpg" alt="Photography preview"
-             class="w-full h-full object-cover opacity-40 transition duration-500"
-             onerror="this.parentElement.style.background='#1c0606'; this.style.display='none'">
-        <div class="absolute inset-0 flex flex-col items-center justify-center gap-2">
-          <span class="mono text-[#d4af37] text-[10px] uppercase tracking-[0.25em] opacity-70">see all</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="opacity-60"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
-        </div>
-      </div>
-
-    </div>
-  </a>
-
-</section>
-
-  <!-- caption strip -->
-  <p class="mono text-[10px] text-slate-600 uppercase tracking-[0.25em] text-center">
-    35mm &nbsp;·&nbsp; Street &nbsp;·&nbsp; Architecture &nbsp;·&nbsp; Light &amp; Shadow
-  </p>
-</section>
 
 <!-- ═══════════════════════════  FOOTER  ═══════════════════════════ -->
 <footer id="contact" class="text-center py-6 border-t border-white/5 mt-10">
